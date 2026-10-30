@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Minniondeck</title>
+<meta name="description" content="Big square buttons and live screens on your Android phone. Press a button and your PC runs it, in the sim or on the desktop.">
+<link rel="icon" href="assets/icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;600&family=IBM+Plex+Mono&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#1c2133;--panel:#252b42;--ink:#f4f6ff;--mute:#a7aecb;--line:#0b0e19;--mint:#5fd0a8;--sky:#7cc4ff;--lilac:#b79cff;--peach:#ffb38a;--sun:#ffc93c;--coral:#ff5a5f}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Pixelify Sans",system-ui,sans-serif;font-size:18px;line-height:1.55}
+a{color:var(--sky)}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+nav{display:flex;align-items:center;gap:20px;padding:18px 0;flex-wrap:wrap}
+nav .brand{display:flex;align-items:center;gap:12px;font-weight:600;font-size:22px;color:var(--ink);text-decoration:none;margin-right:auto}
+nav .brand img{width:36px;height:36px;image-rendering:pixelated}
+nav a.l{color:var(--mute);text-decoration:none}
+nav a.l:hover{color:var(--mint)}
+.hero{padding:40px 0 20px;text-align:center}
+.hero h1{font-size:clamp(34px,6vw,60px);line-height:1.1;margin:0 0 14px}
+.hero p{color:var(--mute);max-width:640px;margin:0 auto 26px}
+.btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.btn{display:inline-block;padding:12px 22px;background:var(--mint);color:#0b0e19;text-decoration:none;font-weight:600;border:3px solid var(--line);box-shadow:5px 5px 0 var(--line)}
+.btn.alt{background:var(--panel);color:var(--ink);border-color:#f4f6ff}
+.btn.off{background:var(--panel);color:var(--mute);border-color:var(--mute);box-shadow:none;cursor:default}
+.shot{margin:34px auto 0;max-width:900px;border:4px solid var(--line);box-shadow:8px 8px 0 var(--line);background:var(--panel)}
+.shot img{display:block;width:100%;height:auto}
+section{padding:56px 0 8px}
+h2{font-size:32px;margin:0 0 18px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
+.card{background:var(--panel);border:3px solid var(--line);box-shadow:5px 5px 0 var(--line);padding:18px}
+.card h3{margin:0 0 6px;font-size:20px}
+.card p{margin:0;color:var(--mute);font-size:16px}
+.dot{display:inline-block;width:14px;height:14px;margin-right:8px;border:2px solid var(--line)}
+.soon{background:var(--panel);border:3px dashed var(--mute);padding:22px;color:var(--mute)}
+.soon b{color:var(--ink)}
+footer{margin:70px 0 30px;padding-top:20px;border-top:3px dashed #3a4262;color:var(--mute);font-size:15px}
+footer p{margin:6px 0}
+@media (max-width:520px){body{font-size:16px}nav{gap:14px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav>
+  <a class="brand" href="#"><img src="assets/icon.png" alt="">Minniondeck</a>
+  <a class="l" href="#features">Features</a>
+  <a class="l" href="#marketplace">Marketplace</a>
+  <a class="l" href="#docs">Docs</a>
+  <a class="l" href="https://github.com/minnnion/MinnionDeck">GitHub</a>
+</nav>
+
+<header class="hero">
+  <h1>Big square buttons.<br>Live screens. Your phone.</h1>
+  <p>Press a button on your Android phone and your PC runs it, in the sim or on the desktop. Built for Microsoft Flight Simulator 2024 first, with plugins for everything else.</p>
+  <div class="btns">
+    <span class="btn off" title="The installer is on its way">Download (coming soon)</span>
+    <a class="btn alt" href="https://github.com/minnnion/MinnionDeck">View on GitHub</a>
+  </div>
+  <div class="shot"><img src="assets/deck.png" alt="The Minniondeck desktop app with a flight simulator profile"></div>
+</header>
+
+<section id="features">
+  <h2>What you get</h2>
+  <div class="grid">
+    <div class="card"><h3><span class="dot" style="background:var(--sky)"></span>Deck and designer</h3><p>Pages, folders and profiles. Pixel-art buttons with layers, states, press animations and thousands of icons.</p></div>
+    <div class="card"><h3><span class="dot" style="background:var(--mint)"></span>Phone as the deck</h3><p>Pair over Wi-Fi with a matching number. The phone follows your PC, page for page.</p></div>
+    <div class="card"><h3><span class="dot" style="background:var(--lilac)"></span>Plugins</h3><p>Signed plugins add whole worlds of buttons. Passwords stay encrypted on your PC.</p></div>
+    <div class="card"><h3><span class="dot" style="background:var(--peach)"></span>Flight sim ready</h3><p>Fenix A320 panels, a live map, BeyondATC, GSX Pro, SimBrief and a cockpit camera.</p></div>
+    <div class="card"><h3><span class="dot" style="background:var(--sun)"></span>Local speech</h3><p>An offline voice with 37 English voices. Nothing leaves your PC.</p></div>
+    <div class="card"><h3><span class="dot" style="background:var(--coral)"></span>Auto profiles</h3><p>Switch profiles by itself when OBS, Spotify or your game comes to the front.</p></div>
+  </div>
+</section>
+
+<section id="marketplace">
+  <h2>MinnionDeck Marketplace</h2>
+  <div class="soon"><b>Coming soon.</b> Browse plugins and profiles here and install them with one click. The plugin list lives in the <a href="https://github.com/minnnion/MinnionDeck-Marketplace">MinnionDeck Marketplace</a> repository.</div>
+</section>
+
+<section id="docs">
+  <h2>Docs</h2>
+  <div class="soon"><b>Coming soon.</b> Setup, pairing a phone, building profiles and writing plugins.</div>
+</section>
+
+<section id="gifs">
+  <h2>GIF and picture makers</h2>
+  <div class="soon"><b>Coming soon.</b> Draw pixel pictures and GIFs here, download them, then bring them into a button with Import in the app.</div>
+</section>
+
+<footer>
+  <p>Minniondeck is source-available, all rights reserved. See the <a href="https://github.com/minnnion/MinnionDeck/blob/main/LICENSE">license</a>.</p>
+  <p>Not affiliated with Microsoft, Asobo, Fenix Simulations, BeyondATC, FSDreamTeam, Spotify or any other product named here. All names belong to their owners.</p>
+</footer>
+</div>
+</body>
+</html>
