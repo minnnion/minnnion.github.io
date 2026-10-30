@@ -6,7 +6,7 @@
     {
       "id": "minnion_spotify",
       "name": "Spotify",
-      "version": "0.2.2",
+      "version": "0.1.0",
       "api": 2,
       "category": "general",
       "official": true,
@@ -46,14 +46,14 @@
         "A Spotify account",
         "Your own Client ID from developer.spotify.com (free, takes a minute)"
       ],
-      "file": "minnion_spotify-0.2.2.mdplugin",
-      "size": 1252243,
-      "sha256": "bddf08b35c335ad9811c04f3eb0d696eab720ea97d6fef3bd97c88ed22774351",
+      "file": "minnion_spotify-0.1.0.mdplugin",
+      "size": 1252259,
+      "sha256": "2d0e1b2496f64141dbc173bb57ad0a5dfafbb03482674046e8eeffbb8dd006e4",
       "versions": [
         {
-          "v": "0.2.2",
-          "size": 1252243,
-          "sha256": "bddf08b35c335ad9811c04f3eb0d696eab720ea97d6fef3bd97c88ed22774351"
+          "v": "0.1.0",
+          "size": 1252259,
+          "sha256": "2d0e1b2496f64141dbc173bb57ad0a5dfafbb03482674046e8eeffbb8dd006e4"
         }
       ]
     }
