@@ -1,43 +1,12 @@
 {
   "schema": 1,
-  "updated": "2026-10-29",
+  "updated": "2026-10-30",
   "release_base": "",
   "plugins": [
     {
-      "id": "minnioncore_deck",
-      "name": "MSFS 2024",
-      "version": "0.27.0",
-      "api": 2,
-      "category": "flight",
-      "official": true,
-      "author": "Minniondeck",
-      "color": "sky",
-      "icon": "icons/gsx-push.png",
-      "summary": "GSX, ATC, SimBrief, camera and live data keys.",
-      "about": "Talks to Microsoft Flight Simulator 2024 through SimConnect and its own in-sim add-on. Adds live altitude and airspeed keys, a live map, your SimBrief flight plan, BeyondATC stations and requests, GSX Pro menus and pushback, and cockpit camera views with head motion.",
-      "shots": ["icons/gsx-push.png", "icons/gsx-service.png", "icons/atis.png", "icons/batc-station.png", "icons/ofp.png", "icons/camera-view.png", "icons/nav-phases.png", "icons/ac-737.png", "icons/atc-log.png", "icons/batc-request.png", "icons/batc-tune.png", "icons/taxi-gs.png", "icons/gsx-menu.png", "icons/camera-toggle.png", "icons/camera-save.png", "icons/nav-folder.png"],
-      "actions": ["Altitude", "Airspeed", "Altitude target up", "Altitude target down", "Live map", "SimBrief OFP", "ATC messages", "ATC station", "Flight phase", "ATC request", "Tune ATC", "BeyondATC switch", "ATIS", "Taxi value", "GSX menu", "GSX pushback", "GSX service", "Camera view", "Camera view back", "Save view (in the sim)", "Camera effects on/off", "Camera re-centre"],
-      "settings": ["Map background", "Street map tile address", "Check the connection", "SimBrief username or Pilot ID", "SimBrief route on the map", "Check BeyondATC", "Check GSX", "Camera: effects (head motion)", "Camera: motion strength (%)"],
-      "needs": ["Microsoft Flight Simulator 2024", "The Minnioncore add-on in your Community folder", "GSX Pro, BeyondATC and SimBrief for their keys (optional)"],
-      "file": "minnioncore_deck-0.27.0.mdplugin",
-      "size": 739703,
-      "sha256": "bfcec48bd9cc22a12aa94b96e89e82299b9ee3f54a767c00372a1e941e911750",
-      "versions": [
-        {"v": "0.27.0", "size": 739703, "sha256": "bfcec48bd9cc22a12aa94b96e89e82299b9ee3f54a767c00372a1e941e911750"},
-        {"v": "0.26.6", "size": 807268, "sha256": "9a10b8aed5bb357147508b7b2a6a4e86d857de9bae069fa2cf5aec47cf5de96e"},
-        {"v": "0.26.5", "size": 814543, "sha256": "d12ad431bd078f5fab00ecd9542d85d7dbe2ed3f6d24d19198369b0b14509987"},
-        {"v": "0.26.4", "size": 814307, "sha256": "49d49c98b6ddb74c4a5af1b81955743b1c5d8354bcfabe9d20241f11842f36f1"},
-        {"v": "0.26.3", "size": 811511, "sha256": "88c2bf55083687c01e9e9ee8aea43a056925aa1b15ddfc4ebffe47b3ba13dc5a"},
-        {"v": "0.26.2", "size": 804349, "sha256": "b89a6c23558212f9d33b0366b297047023f6bb25800c4f213ec78c5b5984e420"},
-        {"v": "0.26.1", "size": 803319, "sha256": "338f65d9c617ec9a8bb232e4e740f646ee5d506bb7df10943ab84da019d7fc41"},
-        {"v": "0.26.0", "size": 802486, "sha256": "a82cc70d8600d9473fcf6cf40eea1778bc08e9cfcdf8423fdca70c0524fe9a59"},
-        {"v": "0.25.6", "size": 827166, "sha256": "5c85f1f5eda450e7aa2195fe010120c29d2c27a5d7ff95056ab7414ac39cd5a6"}
-      ]
-    },
-    {
       "id": "minnion_spotify",
       "name": "Spotify",
-      "version": "0.2.1",
+      "version": "0.2.2",
       "api": 2,
       "category": "general",
       "official": true,
@@ -46,63 +15,46 @@
       "icon": "icons/sp-now.png",
       "summary": "Play, skip, like, volume and now playing.",
       "about": "Controls Spotify from your deck and shows what's playing on a key. You sign in once in your browser and Minniondeck keeps you signed in.",
-      "shots": ["icons/sp-now.png", "icons/sp-prev.png", "icons/sp-play.png", "icons/sp-pause.png", "icons/sp-next.png", "icons/sp-like-off.png", "icons/sp-like-on.png", "icons/sp-volume.png", "icons/sp-knob.png", "icons/sp-library.png", "icons/sp-list.png"],
-      "actions": ["Now playing", "Previous song", "Next song", "Play or pause", "Like the song", "Spotify volume", "Spotify library"],
-      "settings": ["Spotify Client ID", "Sign in", "Log out"],
-      "needs": ["A Spotify account", "Your own Client ID from developer.spotify.com (free, takes a minute)"],
-      "file": "minnion_spotify-0.2.1.mdplugin",
-      "size": 1252273,
-      "sha256": "c8690658c923a4af84ab08525f796c50c9d277b070026643b5d6aa928a3b3110",
+      "shots": [
+        "icons/sp-now.png",
+        "icons/sp-prev.png",
+        "icons/sp-play.png",
+        "icons/sp-pause.png",
+        "icons/sp-next.png",
+        "icons/sp-like-off.png",
+        "icons/sp-like-on.png",
+        "icons/sp-volume.png",
+        "icons/sp-knob.png",
+        "icons/sp-library.png",
+        "icons/sp-list.png"
+      ],
+      "actions": [
+        "Now playing",
+        "Previous song",
+        "Next song",
+        "Play or pause",
+        "Like the song",
+        "Spotify volume",
+        "Spotify library"
+      ],
+      "settings": [
+        "Spotify Client ID",
+        "Sign in",
+        "Log out"
+      ],
+      "needs": [
+        "A Spotify account",
+        "Your own Client ID from developer.spotify.com (free, takes a minute)"
+      ],
+      "file": "minnion_spotify-0.2.2.mdplugin",
+      "size": 1252243,
+      "sha256": "bddf08b35c335ad9811c04f3eb0d696eab720ea97d6fef3bd97c88ed22774351",
       "versions": [
-        {"v": "0.2.1", "size": 1252273, "sha256": "c8690658c923a4af84ab08525f796c50c9d277b070026643b5d6aa928a3b3110"},
-        {"v": "0.2.0", "size": 1251932, "sha256": "2049c9b5b681b4d57592d890a8e48f6fd9fd18a9296922c260a2466a73754ac3"},
-        {"v": "0.1.0", "size": 1284171, "sha256": "28f2e8c9f1b4127cfd6b4a125d9f55b599faee62a4ec1b3276731490b88d8564"}
-      ]
-    },
-    {
-      "id": "minnion_lights",
-      "name": "Case Lights",
-      "version": "0.4.1",
-      "api": 2,
-      "category": "general",
-      "official": true,
-      "author": "Minniondeck",
-      "color": "peach",
-      "icon": "icons/lt-c-cyan-on.png",
-      "summary": "MSI board RGB colours, scenes and status.",
-      "about": "Sets your MSI motherboard's lights straight from a key, with no MSI app needed. It also watches the lighting controller, puts your lights back if something changes them, and can report and fix common lighting problems.",
-      "shots": ["icons/lt-c-cyan-on.png", "icons/lt-c-pink-on.png", "icons/lt-c-orange-on.png", "icons/lt-c-green-on.png", "icons/lt-c-purple-on.png", "icons/lt-c-yellow-on.png", "icons/lt-c-blue-on.png", "icons/lt-c-white-on.png", "icons/lt-screen-on.png", "icons/lt-ok.png", "icons/lt-warn.png", "icons/lt-problem.png", "icons/lt-report.png", "icons/lt-timeline.png", "icons/lt-fix.png", "icons/lt-fixed.png"],
-      "actions": ["Lights status", "Lights acted up", "Set the lights", "Screen sync", "Fix a lights issue", "Lights report", "Lights timeline"],
-      "settings": ["How far back to look", "Watch the lighting controller", "Keep the lights as I set them", "Clear my logged moments"],
-      "needs": ["An MSI motherboard with Mystic Light (tested on the B550 Tomahawk)"],
-      "file": "minnion_lights-0.4.1.mdplugin",
-      "size": 277470,
-      "sha256": "5342b877df183bc97cf7bd18adf876b4597ae989a852735732eb6bc7ff3eb660",
-      "versions": [
-        {"v": "0.4.1", "size": 277470, "sha256": "5342b877df183bc97cf7bd18adf876b4597ae989a852735732eb6bc7ff3eb660"}
-      ]
-    },
-    {
-      "id": "minnion_speech",
-      "name": "Speech",
-      "version": "0.1.0",
-      "api": 2,
-      "category": "general",
-      "official": true,
-      "author": "Minniondeck",
-      "color": "sun",
-      "icon": "icons/speak.png",
-      "summary": "Offline text to speech with 37 English voices.",
-      "about": "A Speak key reads your text out loud. The voices run on your own PC, so it works offline and nothing is sent anywhere.",
-      "shots": ["icons/speak.png"],
-      "actions": ["Speak"],
-      "settings": [],
-      "needs": ["About 64 MB of disk space for the voices"],
-      "file": "minnion_speech-0.1.0.mdplugin",
-      "size": 63670609,
-      "sha256": "019a178d909e18192a4b7cb453e19982820a4420893b3c3de2b4f1ed0ef37a51",
-      "versions": [
-        {"v": "0.1.0", "size": 63670609, "sha256": "019a178d909e18192a4b7cb453e19982820a4420893b3c3de2b4f1ed0ef37a51"}
+        {
+          "v": "0.2.2",
+          "size": 1252243,
+          "sha256": "bddf08b35c335ad9811c04f3eb0d696eab720ea97d6fef3bd97c88ed22774351"
+        }
       ]
     }
   ]
