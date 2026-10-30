@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "updated": "2026-10-30",
-  "release_base": "",
+  "release_base": "https://raw.githubusercontent.com/minnnion/Minnion-Marketplace/main/plugins",
   "plugins": [
     {
       "id": "minnion_spotify",

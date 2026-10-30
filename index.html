@@ -1297,7 +1297,7 @@ footer .f-brand p{margin-top:8px;max-width:34ch}
       <ol class="steps" style="grid-template-columns:minmax(0,1fr);margin-top:8px">
         <li class="frame"><h3>Build it</h3><p>Start from the plugin kit's Rust template and pack a .mdplugin.</p></li>
         <li class="frame"><h3>Sign it</h3><p>Sign the pack with your author key. Unsigned plugins install, but only run in Developer mode.</p></li>
-        <li class="frame"><h3>Open a pull request</h3><p>Attach the .mdplugin to a GitHub release and add your entry to index.json.</p></li>
+        <li class="frame"><h3>Open a pull request</h3><p>Add your plugin folder under plugins/ and your entry to index.json.</p></li>
       </ol>
     </div>
     <pre aria-label="Example index.json entry">{
@@ -1331,7 +1331,7 @@ footer .f-brand p{margin-top:8px;max-width:34ch}
       <summary>Didn't open?</summary>
       <ol>
         <li><div><b>Get Minniondeck</b><p>The browser needs Minniondeck installed to open it. <a href="#download" data-view="download">Download it here</a>, then try again.</p></div></li>
-        <li><div><b>Or download the file yourself</b><p id="inst-file"></p><div class="pd-get" style="margin-top:8px"><a class="btn plain" id="inst-dl" href="#" style="font-size:15px;padding:5px 12px">Download .mdplugin</a></div><p class="pending" id="inst-pending" hidden>Not published yet. Plugin files go up on GitHub Releases with the first release.</p><p>Double-click it, and Minniondeck asks before installing. In the app you can also open Plugins and choose Install a plugin.</p></div></li>
+        <li><div><b>Or download the file yourself</b><p id="inst-file"></p><div class="pd-get" style="margin-top:8px"><a class="btn plain" id="inst-dl" href="#" style="font-size:15px;padding:5px 12px">Download .mdplugin</a></div><p class="pending" id="inst-pending" hidden>Not published yet. Plugin files go in the marketplace's plugins folder.</p><p>Double-click it, and Minniondeck asks before installing. In the app you can also open Plugins and choose Install a plugin.</p></div></li>
       </ol>
     </details>
   </div>
@@ -1718,7 +1718,7 @@ export!(MyPlugin);</code></pre>
   </tbody></table></div>
   <h2>Put it on the marketplace</h2>
   <ol class="dsteps">
-    <li><div>Make a GitHub release named <code>&lt;id&gt;-v&lt;version&gt;</code> and attach <code>&lt;id&gt;-&lt;version&gt;.mdplugin</code>.</div></li>
+    <li><div>Add a folder <code>plugins/&lt;id&gt;/</code> with <code>&lt;id&gt;-&lt;version&gt;.mdplugin</code> inside it.</div></li>
     <li><div>Get its size and checksum: <code>Get-FileHash .\my_plugin-0.1.0.mdplugin</code> in PowerShell.</div></li>
     <li><div>Open a pull request adding your entry to the marketplace's <code>index.json</code>, with the size and SHA-256. Minniondeck refuses a download that doesn't match them.</div></li>
   </ol>
@@ -1888,7 +1888,7 @@ export!(MyPlugin);</code></pre>
       <article class="way frame lift" data-skills="sim"><div class="ic" style="background:var(--sky)"><img class="px" src="icons/ac-737.png" alt=""></div><h3>Tell us what your sim needs</h3><p>Which buttons do you reach for in flight, on the road or on track? Ideas from real setups shape what gets built next.</p><span class="chip soon">GitHub Discussions soon</span></article>
       <article class="way frame lift" data-skills="sim"><div class="ic" style="background:var(--mint)"><img class="px" src="icons/lt-check.png" alt=""></div><h3>Test new versions</h3><p>Try a new build before it's released and say what happened. Testers with different sims, phones and PCs catch the most.</p><span class="chip soon">Beta channel soon</span></article>
       <article class="way frame lift" data-skills="rust"><div class="ic" style="background:var(--lilac)"><img class="px" src="icons/nav-folder.png" alt=""></div><h3>Make a plugin</h3><p>Add actions for an app or sim with the Rust plugin kit. The template builds, packs and installs itself.</p><a class="btn plain" href="#docs/make-plugin" data-view="docs/make-plugin">Plugin guide</a></article>
-      <article class="way frame lift" data-skills="rust"><div class="ic" style="background:var(--sun)"><img class="px" src="icons/gsx-service.png" alt=""></div><h3>Put a plugin on the marketplace</h3><p>Sign it, attach it to a GitHub release, and add your entry to the marketplace list by pull request.</p><a class="btn plain" href="#docs/publish-plugin" data-view="docs/publish-plugin">How to publish</a></article>
+      <article class="way frame lift" data-skills="rust"><div class="ic" style="background:var(--sun)"><img class="px" src="icons/gsx-service.png" alt=""></div><h3>Put a plugin on the marketplace</h3><p>Sign it, add its folder under plugins/, and add your entry to the marketplace list by pull request.</p><a class="btn plain" href="#docs/publish-plugin" data-view="docs/publish-plugin">How to publish</a></article>
       <article class="way frame lift" data-skills="art"><div class="ic" style="background:var(--lilac)"><img class="px" src="icons/sp-like-on.png" alt=""></div><h3>Draw icons and GIFs</h3><p>Pixel icons for plugins, GIFs for buttons, and button designs people can start from. Make them on this site.</p><a class="btn plain" href="#gifs" data-view="gifs">Open the GIF maker</a></article>
       <article class="way frame lift" data-skills="lang"><div class="ic" style="background:var(--mint)"><img class="px" src="icons/speak.png" alt=""></div><h3>Translate Minniondeck</h3><p>Hindi, German, Spanish and Japanese are already waiting in Settings. Help word the app for people who speak them, or add another.</p><span class="chip soon">Translation files soon</span></article>
       <article class="way frame lift" data-skills="sim words art"><div class="ic" style="background:var(--coral)"><img class="px" src="icons/batc-station.png" alt=""></div><h3>Spread the word</h3><p>Show your deck in a stream, a forum post or a video. Simmers find Minniondeck from other simmers.</p><a class="btn plain" href="#home" data-view="home">Share the home page</a></article>
@@ -2606,7 +2606,7 @@ export!(MyPlugin);</code></pre>
   function fileUrl(p, v){
     var base = MK.data.release_base;
     v = v || p.version;
-    return base ? base.replace(/\/$/, "") + "/" + p.id + "-v" + v + "/" + p.id + "-" + v + ".mdplugin" : "";
+    return base ? base.replace(/\/$/, "") + "/" + p.id + "/" + p.id + "-" + v + ".mdplugin" : "";
   }
 
   function mkLoad(then){
