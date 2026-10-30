@@ -1324,7 +1324,7 @@ footer .f-brand p{margin-top:8px;max-width:34ch}
     <div class="inst-head"><img class="px" id="inst-icon" src="icons/icon.png" alt=""><div><h2 id="inst-title">Plugin</h2><p class="mk-count" id="inst-sub"></p></div></div>
     <div class="opening">
       <div class="ldr" aria-hidden="true"><i></i><i></i><i></i></div>
-      <div><b>Opening Minniondeck…</b><p>It shows <span id="inst-name2">the plugin</span>, downloads it from GitHub, checks it, and asks before installing.</p></div>
+      <div><b>Opening Minniondeck…</b><p>It shows <span id="inst-name2">the plugin</span>, downloads it from GitHub, checks it, and asks before installing.<span id="inst-prof"></span></p></div>
     </div>
     <div class="pd-get"><a class="btn mint" id="inst-again" href="#" style="font-size:16px;padding:6px 14px">Open Minniondeck again</a></div>
     <details class="nope">
@@ -1332,6 +1332,7 @@ footer .f-brand p{margin-top:8px;max-width:34ch}
       <ol>
         <li><div><b>Get Minniondeck</b><p>The browser needs Minniondeck installed to open it. <a href="#download" data-view="download">Download it here</a>, then try again.</p></div></li>
         <li><div><b>Or download the file yourself</b><p id="inst-file"></p><div class="pd-get" style="margin-top:8px"><a class="btn plain" id="inst-dl" href="#" style="font-size:15px;padding:5px 12px">Download .mdplugin</a></div><p class="pending" id="inst-pending" hidden>Not published yet. Plugin files go in the marketplace's plugins folder.</p><p>Double-click it, and Minniondeck asks before installing. In the app you can also open Plugins and choose Install a plugin.</p></div></li>
+        <li id="inst-pli" hidden><div><b>The profile</b><p id="inst-pfile"></p><div class="pd-get" style="margin-top:8px"><a class="btn plain" id="inst-pdl" href="#" style="font-size:15px;padding:5px 12px" download>Download profile</a></div><p>Double-click it, or use Import on the Profiles page, to add its pages.</p></div></li>
       </ol>
     </details>
   </div>
@@ -1718,7 +1719,7 @@ export!(MyPlugin);</code></pre>
   </tbody></table></div>
   <h2>Put it on the marketplace</h2>
   <ol class="dsteps">
-    <li><div>Add a folder <code>plugins/&lt;id&gt;/</code> with <code>&lt;id&gt;-&lt;version&gt;.mdplugin</code> inside it.</div></li>
+    <li><div>Add a folder <code>plugins/&lt;id&gt;/</code> with <code>&lt;id&gt;-&lt;version&gt;.mdplugin</code> inside it. If the plugin comes with a profile, put the <code>.mdprofile</code> file in the same folder and add a <code>profile</code> entry to the list.</div></li>
     <li><div>Get its size and checksum: <code>Get-FileHash .\my_plugin-0.1.0.mdplugin</code> in PowerShell.</div></li>
     <li><div>Open a pull request adding your entry to the marketplace's <code>index.json</code>, with the size and SHA-256. Minniondeck refuses a download that doesn't match them.</div></li>
   </ol>
@@ -2603,6 +2604,10 @@ export!(MyPlugin);</code></pre>
   function appLink(p, v){
     return "minniondeck://install?id=" + encodeURIComponent(p.id) + (v && v !== p.version ? "&v=" + encodeURIComponent(v) : "");
   }
+  function profileUrl(p){
+    var base = MK.data.release_base;
+    return base && p.profile ? base.replace(/\/$/, "") + "/" + p.id + "/" + p.profile.file : "";
+  }
   function fileUrl(p, v){
     var base = MK.data.release_base;
     v = v || p.version;
@@ -2684,7 +2689,7 @@ export!(MyPlugin);</code></pre>
           '<span class="label">' + esc(CATNAME[p.category] || p.category) + (p.official ? " · Official" : " · Community") + '</span>' +
           '<h1><img class="px" src="' + esc(p.icon) + '" alt="">' + esc(p.name) + '</h1>' +
           '<p>' + esc(p.about) + '</p>' +
-          '<div class="pd-meta"><span class="chip">v' + esc(p.version) + '</span><span class="chip">' + p.actions.length + (p.actions.length === 1 ? " key" : " keys") + '</span><span class="chip">Plugin API ' + esc(p.api) + '</span><span class="chip">By ' + esc(p.author) + '</span></div>' +
+          '<div class="pd-meta"><span class="chip">v' + esc(p.version) + '</span><span class="chip">' + p.actions.length + (p.actions.length === 1 ? " key" : " keys") + '</span><span class="chip">Plugin API ' + esc(p.api) + '</span><span class="chip">By ' + esc(p.author) + '</span>' + (p.profile ? '<span class="chip ok">Includes a profile</span>' : "") + '</div>' +
           '<div class="pd-get"><a class="btn mint" href="' + esc(appLink(p)) + '" data-install="' + esc(p.id) + '">Install v' + esc(p.version) + '</a><span class="mk-count">Opens Minniondeck · ' + size(p.size) + ' from GitHub</span></div>' +
           '<div class="hash">SHA-256<code title="' + esc(p.sha256) + '">' + esc(p.sha256) + '</code><button type="button" class="mini" data-copy="' + esc(p.sha256) + '">Copy</button></div>' +
         '</div>' +
@@ -2696,7 +2701,8 @@ export!(MyPlugin);</code></pre>
         '<div class="pd-box frame"><h3>Versions</h3><table class="vers"><tbody>' + p.versions.map(function(v, n){
           return '<tr><td>v' + esc(v.v) + (n === 0 ? ' <span class="chip ok">Latest</span>' : "") + '</td><td>' + size(v.size) + '</td><td><a class="mini" href="' + esc(appLink(p, v.v)) + '" data-install="' + esc(p.id) + '" data-ver="' + esc(v.v) + '">Install</a></td></tr>';
         }).join("") + '</tbody></table></div>' +
-      '</div>';
+      '</div>' +
+      (p.profile ? '<div class="pd-box frame" style="margin-top:20px"><h3>Comes with a profile</h3><p>' + esc(p.profile.name) + ', ' + p.profile.pages + (p.profile.pages === 1 ? " page" : " pages") + '. After the plugin installs, Minniondeck offers to add it to your profiles, so the buttons are ready.</p><div class="pd-get"><a class="mini" href="' + esc(profileUrl(p)) + '" download>Download ' + esc(p.profile.file) + '</a></div><div class="hash">SHA-256<code title="' + esc(p.profile.sha256) + '">' + esc(p.profile.sha256) + '</code><button type="button" class="mini" data-copy="' + esc(p.profile.sha256) + '">Copy</button></div></div>' : "");
   }
 
   /* install dialog */
@@ -2710,6 +2716,10 @@ export!(MyPlugin);</code></pre>
     document.getElementById("inst-title").textContent = p.name;
     document.getElementById("inst-sub").textContent = "v" + v + (v === p.version ? " · latest" : " · older version");
     document.getElementById("inst-file").textContent = p.id + "-" + v + ".mdplugin · " + size(vi.size);
+    document.getElementById("inst-prof").textContent = p.profile ? " Then it offers to add the " + p.profile.name + " profile." : "";
+    var pli = document.getElementById("inst-pli");
+    pli.hidden = !(p.profile && profileUrl(p));
+    if (!pli.hidden){ document.getElementById("inst-pfile").textContent = p.profile.file + " · " + size(p.profile.size); document.getElementById("inst-pdl").href = profileUrl(p); }
     document.getElementById("inst-name2").textContent = p.name + " " + v;
     document.getElementById("inst-again").href = appLink(p, v);
     document.querySelector("#inst .nope").open = false;

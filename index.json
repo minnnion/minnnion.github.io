@@ -55,7 +55,14 @@
           "size": 1252259,
           "sha256": "2d0e1b2496f64141dbc173bb57ad0a5dfafbb03482674046e8eeffbb8dd006e4"
         }
-      ]
+      ],
+      "profile": {
+        "name": "Spotify",
+        "file": "Spotify.mdprofile",
+        "pages": 2,
+        "size": 3755,
+        "sha256": "3b1f53894d1474544829c97427e1b0382b253a63eddd7b0ec27119ba39b4f9a3"
+      }
     }
   ]
 }
