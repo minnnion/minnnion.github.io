@@ -378,7 +378,7 @@ section{display:flex;flex-direction:column;gap:24px}
 /* marketplace view */
 .mk-top{display:flex;flex-direction:column;gap:14px;max-width:70ch}
 .mk-top h1{font-size:clamp(36px,5vw,58px)}
-.tools{display:flex;gap:12px;flex-wrap:wrap;align-items:center;padding:12px;position:sticky;top:calc(env(safe-area-inset-top,0px) + 66px);z-index:4}
+.mk-tools{display:flex;gap:12px;flex-wrap:wrap;align-items:center;padding:12px;position:sticky;top:calc(env(safe-area-inset-top,0px) + 66px);z-index:4}
 .search{flex:1 1 240px;display:flex;align-items:center;gap:8px;border:3px solid var(--ink);background:var(--tile);padding:0 10px;min-width:0}
 .search svg{width:18px;height:18px;flex:none;shape-rendering:crispEdges}
 .search input{flex:1;min-width:0;border:0;outline:0;background:none;font-family:var(--f-pix);font-size:17px;color:var(--ink);padding:8px 0}
@@ -819,7 +819,7 @@ footer .fine{grid-column:1/-1;font-family:var(--f-mono);font-size:12px;border-to
   .dside .dnav{display:none}
   .dside.open .dnav{display:flex}
   .dmain{padding:20px}
-  .tools{position:static}
+  .mk-tools{position:static}
   .phone,.under{margin-inline:auto}
   .steps{grid-template-columns:minmax(0,1fr)}
   footer .wrap{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
@@ -852,6 +852,72 @@ footer .fine{grid-column:1/-1;font-family:var(--f-mono);font-size:12px;border-to
   .ready{grid-template-columns:minmax(0,1fr)}
   .warn{padding:20px}
 }
+
+/* ===== Screen sizes =====
+   Phones and tablets get a Menu button instead of nine wrapped links; big screens get more room */
+.menu-btn{display:none;margin-left:auto;align-items:center;gap:8px;font-family:var(--f-pix);font-size:16px;font-weight:600;color:var(--chrome-fg);background:none;border:3px solid var(--chrome-fg);padding:5px 12px;cursor:pointer}
+.menu-btn:hover{background:var(--chrome-2)}
+.mb-ic{display:flex;flex-direction:column;gap:3px;width:16px}
+.mb-ic i{display:block;height:3px;background:currentColor;transition:transform .15s var(--step),opacity .15s}
+.top.open .mb-ic i:nth-child(1){transform:translateY(6px) rotate(45deg)}
+.top.open .mb-ic i:nth-child(2){opacity:0}
+.top.open .mb-ic i:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+@media (max-width:1100px){
+  .menu-btn{display:flex}
+  .top .wrap{flex-wrap:wrap;padding-block:8px}
+  .nav{display:none;width:100%;margin:0;padding:6px 0 4px;flex-direction:column;gap:4px;max-height:calc(100dvh - 80px);overflow-y:auto}
+  .top.open .nav{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));animation:logIn .2s var(--step)}
+  .nav a{justify-content:flex-start;padding:10px 12px;font-size:17px;border-color:#3a4560}
+  .mk-tools{top:calc(env(safe-area-inset-top,0px) + 62px)}
+  .dside{top:calc(env(safe-area-inset-top,0px) + 74px)}
+}
+@media (max-width:640px){
+  .top.open .nav{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .brand{font-size:20px}
+  .brand img{width:32px;height:32px}
+}
+@media (max-width:360px){
+  .top.open .nav{grid-template-columns:minmax(0,1fr)}
+  .menu-btn #menu-label{display:none}
+}
+/* Tablets: the makers keep the canvas first and two panels side by side under it */
+@media (max-width:860px){
+  .mkr{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .mkr > .stage2{grid-column:1/-1;order:-1}
+  .mkr > .side-r{grid-column:auto}
+  .mkr-top{align-items:flex-start}
+  .tr-app .tr-notes{order:-1}
+  main{padding-block:28px 64px}
+}
+@media (max-width:560px){
+  .mkr{grid-template-columns:minmax(0,1fr)}
+  .cvwrap{padding:8px}
+  .tabs2 button{flex:1 1 auto}
+  .bar2 .btn{padding:5px 10px;font-size:14px}
+  .hero h1{font-size:clamp(32px,10vw,44px)}
+  .head h2,.band h2{font-size:clamp(24px,7.5vw,32px)}
+  .final{padding:32px 16px}
+  .btn{font-size:16px;padding:9px 16px}
+  .cta .btn{flex:1 1 auto;justify-content:center}
+  .faq summary{font-size:17px}
+  .dpage td:first-child{white-space:normal}
+  .conn{padding:16px}
+  .pq{width:150px;height:150px}
+}
+/* Touch screens: no hover lift that sticks after a tap */
+@media (hover:none){
+  .lift:hover{transform:none;box-shadow:4px 4px 0 var(--shadow)}
+}
+/* Big screens: a wider page and slightly larger text */
+@media (min-width:1600px){
+  .wrap{max-width:1320px}
+  body{font-size:18px}
+  .hero h1{font-size:72px}
+}
+@media (min-width:2200px){
+  .wrap{max-width:1500px}
+  body{font-size:19px}
+}
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}
   .rv.pre{transform:none;opacity:1}
@@ -861,7 +927,8 @@ footer .fine{grid-column:1/-1;font-family:var(--f-mono);font-size:12px;border-to
 <header class="top">
   <div class="wrap">
     <a class="brand" href="#home" data-view="home"><img class="px" src="icons/icon.png" alt="">Minniondeck</a>
-    <nav class="nav" aria-label="Main">
+    <button type="button" class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="main-nav"><span class="mb-ic" aria-hidden="true"><i></i><i></i><i></i></span><span id="menu-label">Menu</span></button>
+    <nav class="nav" id="main-nav" aria-label="Main">
       <a href="#home" data-view="home" aria-current="page">Home</a>
       <a href="#tour" data-view="tour">Tour</a>
       <a href="#download" data-view="download">Download</a>
@@ -1200,7 +1267,7 @@ footer .fine{grid-column:1/-1;font-family:var(--f-mono);font-size:12px;border-to
       <h1 class="load d1">Plugins for your deck</h1>
       <p class="lead load d2">Every plugin here is free. Press Install and Minniondeck opens, downloads the plugin from GitHub, checks it and asks before installing.</p>
     </div>
-    <div class="tools frame load d3">
+    <div class="mk-tools frame load d3">
       <label class="search"><svg viewBox="0 0 8 8" aria-hidden="true" fill="currentColor"><rect x="1" y="0" width="3" height="1"/><rect x="0" y="1" width="1" height="3"/><rect x="4" y="1" width="1" height="3"/><rect x="1" y="4" width="3" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="5" y="5" width="1" height="1"/><rect x="6" y="6" width="2" height="2"/></svg><input id="mk-q" type="search" placeholder="Search plugins and keys" aria-label="Search plugins"></label>
       <div class="cats" id="mk-cats" role="group" aria-label="Category"></div>
       <label class="sort">Sort<select id="mk-sort"><option value="name">Name</option><option value="keys">Most keys</option><option value="size">Smallest</option></select></label>
@@ -2301,9 +2368,21 @@ export!(MyPlugin);</code></pre>
     pressLabel(demo[oi]); oi = (oi + 1) % demo.length;
   }, 2300);
 
+  var topBar = document.querySelector(".top"), menuBtn = document.getElementById("menu-btn");
+  function menu(open){
+    topBar.classList.toggle("open", open);
+    menuBtn.setAttribute("aria-expanded", String(open));
+    document.getElementById("menu-label").textContent = open ? "Close" : "Menu";
+  }
+  menuBtn.addEventListener("click", function(){ menu(!topBar.classList.contains("open")); });
+  document.addEventListener("keydown", function(e){ if (e.key === "Escape" && topBar.classList.contains("open")){ menu(false); menuBtn.focus(); } });
+  document.addEventListener("click", function(e){ if (topBar.classList.contains("open") && !e.target.closest(".top")) menu(false); });
+  if (window.matchMedia) matchMedia("(min-width:1101px)").addEventListener("change", function(m){ if (m.matches) menu(false); });
+
   document.addEventListener("click", function(e){
     var link = e.target.closest("[data-view]");
     if (link){
+      menu(false);
       e.preventDefault();
       var v = link.getAttribute("data-view");
       try { history.pushState(null, "", "#" + v); } catch (err) {}
