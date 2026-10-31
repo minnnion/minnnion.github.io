@@ -1006,7 +1006,7 @@ footer .f-brand p{margin-top:8px;max-width:34ch}
 
 <header class="top">
   <div class="wrap">
-    <a class="brand" href="#home" data-view="home"><img class="px" src="icons/icon.png" alt="">Minniondeck<span class="ver" aria-label="version 1.0.1">1.0.1</span></a>
+    <a class="brand" href="#home" data-view="home"><img class="px" src="icons/icon.png" alt="">Minniondeck<span class="ver" aria-label="version 0.1.0">0.1.0</span></a>
     <button type="button" class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="main-nav"><span class="mb-ic" aria-hidden="true"><i></i><i></i><i></i></span><span id="menu-label">Menu</span></button>
     <nav class="nav" id="main-nav" aria-label="Main">
       <a href="#home" data-view="home" aria-current="page">Home</a>
@@ -1040,7 +1040,7 @@ footer .f-brand p{margin-top:8px;max-width:34ch}
         <a class="btn mint" href="#download" data-view="download">Download for Windows</a>
         <a class="btn plain" href="#marketplace" data-view="marketplace">Browse plugins</a>
       </div>
-      <p class="label load d4">Desktop app 1.0.1 · phone app Minnionphone</p>
+      <p class="label load d4">Desktop app 0.1.0 · phone app Minnionphone</p>
     </div>
 
     <div class="stage load d2" id="stage" aria-label="The Deck page of the Minniondeck desktop app, a 5 by 3 page, with each press shown in the PC log">
@@ -1244,9 +1244,9 @@ footer .f-brand p{margin-top:8px;max-width:34ch}
         <div><h2>Minniondeck for PC</h2><p class="sub">Windows 10 and 11, 64-bit · installer .exe</p></div>
         <div class="row">
           <a class="btn mint" href="#download" data-get="pc">Download for Windows</a>
-          <span class="chip">v1.0.1</span>
+          <span class="chip">v0.1.0</span>
         </div>
-        <p class="pending" data-pending="pc">Not published yet. The first release goes up on GitHub Releases soon.</p>
+        <p class="pending" data-pending="pc">Free, with no account or licence key. Windows may warn about an unknown publisher: press More info, then Run anyway. <a href="https://github.com/minnnion/MinnionDeck/releases/latest">All files on GitHub</a></p>
       </article>
       <article class="get frame lift load d4">
         <div class="ic" style="background:var(--sky)"><svg viewBox="0 0 10 10" aria-hidden="true"><g fill="currentColor"><rect x="2" y="0" width="6" height="1"/><rect x="2" y="1" width="1" height="8"/><rect x="7" y="1" width="1" height="8"/><rect x="2" y="9" width="6" height="1"/><rect x="4" y="1" width="2" height="1"/><rect x="4" y="7" width="2" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="5" y="3" width="1" height="1"/><rect x="3" y="5" width="1" height="1"/><rect x="5" y="5" width="1" height="1"/></g></svg></div>
@@ -1296,7 +1296,7 @@ footer .f-brand p{margin-top:8px;max-width:34ch}
       <h3>Windows protected your PC</h3>
       <p>SmartScreen stopped an app it doesn't recognise from starting.</p>
       <u id="ss-more">More info</u>
-      <div class="more"><span>App: Minniondeck_1.0.1_x64-setup.exe</span><span>Publisher: Unknown publisher</span></div>
+      <div class="more"><span>App: Minniondeck_0.1.0_x64-setup.exe</span><span>Publisher: Unknown publisher</span></div>
       <div class="acts"><span class="run" id="ss-run">Run anyway</span><span>Don't run</span></div>
       <svg class="ptr" id="ss-ptr" viewBox="0 0 9 9" shape-rendering="crispEdges"><path fill="#1e2433" d="M0 0h1v1h1v1h1v1h1v1h1v1h1v1h-2v1h1v2h-1v-1h-1v-1h-1v1h-1z"/><path fill="#fff" d="M1 2h1v1h1v1h1v1h1v1h-2v1h-1v1h-1z"/></svg>
     </div>
@@ -1915,7 +1915,7 @@ export!(MyPlugin);</code></pre>
   <section aria-labelledby="ab-now" class="rv">
     <div class="head"><span class="label">Where it is now</span><h2 id="ab-now">The story so far</h2></div>
     <ol class="timeline">
-      <li><b>Minniondeck 1.0.1 for Windows</b><span>Profiles, pages, folders, live buttons, auto-switching, backups and a plugin system that keeps crashes away from the app.</span></li>
+      <li><b>Minniondeck 0.1.0 for Windows</b><span>Profiles, pages, folders, live buttons, auto-switching, backups and a plugin system that keeps crashes away from the app.</span></li>
       <li><b>Minnionphone 1.0 for Android</b><span>Your deck on the phone, paired with a QR code, over your own Wi-Fi.</span></li>
       <li><b>Eight official plugins</b><span>MSFS 2024, Spotify, Speech, Case Lights, Timer, System Monitor, Soundboard and Weather.</span></li>
       <li><b>This website</b><span>Download, the marketplace, docs, and the GIF and image makers.</span></li>
@@ -1989,7 +1989,7 @@ export!(MyPlugin);</code></pre>
           <label class="fld">What happened<textarea name="actual" rows="2"></textarea></label>
         </div>
         <div class="two-f">
-          <label class="fld">Minniondeck version<input type="text" name="version" value="1.0.1"></label>
+          <label class="fld">Minniondeck version<input type="text" name="version" value="0.1.0"></label>
           <label class="fld">Windows<select name="os"><option>Windows 11</option><option>Windows 10</option></select></label>
         </div>
         <div class="two-f">
@@ -2539,8 +2539,9 @@ export!(MyPlugin);</code></pre>
     });
   }
 
-  /* download buttons: no release is published yet, so they point at the note under them */
-  var RELEASE = {pc:"", phone:""};
+  /* download buttons: the PC app is on GitHub Releases; the phone app isn't published yet, so its
+     button points at the note under it */
+  var RELEASE = {pc:"https://github.com/minnnion/MinnionDeck/releases/download/v0.1.0/Minniondeck_0.1.0_x64-setup.exe", phone:""};
   document.addEventListener("click", function(e){
     var g = e.target.closest("[data-get]");
     if (!g) return;
@@ -2564,7 +2565,7 @@ export!(MyPlugin);</code></pre>
     {id:"racing", name:"Car racing", note:"Racing sims", bg:"coral", svg:artSvg(CAT_ART.racing), soon:true}
   ];
   var BASE = [
-    {n:"Minniondeck", v:"1.0.1", img:"icons/icon.png", lock:true},
+    {n:"Minniondeck", v:"0.1.0", img:"icons/icon.png", lock:true},
     {n:"WebView2 runtime", v:"if missing", svg:PX.web, lock:true}
   ];
   var PARTS = {
