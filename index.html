@@ -265,7 +265,13 @@ section{display:flex;flex-direction:column;gap:24px}
 .plug .solo{position:relative;display:flex;align-items:center;gap:14px}
 .plug .solo img{width:64px;height:64px}
 .plug .body{padding:12px 14px 16px;display:flex;flex-direction:column;gap:6px;flex:1}
-.plug h3{font-size:18px}
+.plug h3{font-size:18px;display:flex;align-items:center;gap:8px;min-width:0}
+.plug h3 img{width:28px;height:28px;flex:none;border:3px solid var(--ink);background:var(--chrome);padding:2px}
+/* A plugin with a profile picture: the deck from the app, framed, in the card's top */
+.plug .shot.prev{aspect-ratio:5/3;padding:12px}
+.plug .shot.prev img.deck,.pd-shot img.deck{position:relative;display:block;width:100%;height:100%;object-fit:contain;border:3px solid var(--ink);box-shadow:3px 3px 0 var(--shadow);background:var(--chrome)}
+.plug:hover .shot.prev img.deck{animation:hop .5s var(--step) both}
+.pd-shot.prev{padding:16px}
 .plug p{font-size:14px;color:var(--slate)}
 .plug .meta{display:flex;gap:6px;flex-wrap:wrap;margin-top:auto;padding-top:4px}
 .more{display:flex;align-items:center;gap:14px;flex-wrap:wrap;color:var(--slate);font-size:15px}
@@ -2779,12 +2785,15 @@ export!(MyPlugin);</code></pre>
       return;
     }
     mkGrid.innerHTML = list.map(function(p, n){
-      var art = p.shots.length >= 4
+      // The plugin's profile as it looks in the app; otherwise its keys' pictures
+      var art = p.preview
+        ? '<img class="deck" src="' + esc(p.preview) + '" alt="' + esc(p.name) + ' profile in Minniondeck" loading="lazy">'
+        : p.shots.length >= 4
         ? '<div class="grid8">' + p.shots.slice(0, 8).map(function(s){ return '<img class="px" src="' + esc(s) + '" alt="">'; }).join("") + '</div>'
         : '<div class="solo"><img class="px" src="' + esc(p.icon) + '" alt=""><div class="bars" style="height:40px"><i></i><i></i><i></i><i></i><i></i></div></div>';
       return '<article class="plug frame lift in" style="animation-delay:' + (n * 0.06) + 's">' +
-        '<div class="shot" style="--c:var(--' + esc(p.color || "sky") + ')" data-view="marketplace/' + esc(p.id) + '">' + art + '</div>' +
-        '<div class="body"><h3>' + esc(p.name) + '</h3><p>' + esc(p.summary) + '</p>' +
+        '<div class="shot' + (p.preview ? " prev" : "") + '" style="--c:var(--' + esc(p.color || "sky") + ')" data-view="marketplace/' + esc(p.id) + '">' + art + '</div>' +
+        '<div class="body"><h3><img class="px" src="' + esc(p.icon) + '" alt="">' + esc(p.name) + '</h3><p>' + esc(p.summary) + '</p>' +
         '<div class="meta">' + (p.official ? '<span class="chip ok">Official</span>' : '<span class="chip">Community</span>') +
         '<span class="chip">' + esc(CATNAME[p.category] || p.category) + '</span><span class="chip">v' + esc(p.version) + '</span><span class="chip">' + p.actions.length + (p.actions.length === 1 ? " key" : " keys") + '</span></div>' +
         '<div class="acts"><a class="btn plain" href="#marketplace/' + esc(p.id) + '" data-view="marketplace/' + esc(p.id) + '">Details</a><a class="btn mint" href="' + esc(appLink(p)) + '" data-install="' + esc(p.id) + '">Install</a></div></div></article>';
@@ -2801,9 +2810,11 @@ export!(MyPlugin);</code></pre>
     mkDetail.innerHTML =
       '<a class="back" href="#marketplace" data-view="marketplace">← All plugins</a>' +
       '<div class="pd">' +
-        '<div class="pd-shot frame" style="--c:var(--' + esc(p.color || "sky") + ')"><div class="pd-keys">' +
-          p.shots.map(function(s, n){ return '<span style="animation-delay:' + (n * 0.035) + 's"><img class="px" src="' + esc(s) + '" alt=""></span>'; }).join("") +
-        '</div></div>' +
+        (p.preview
+          ? '<div class="pd-shot prev frame" style="--c:var(--' + esc(p.color || "sky") + ')"><img class="deck" src="' + esc(p.preview) + '" alt="' + esc(p.name) + ' profile in Minniondeck"></div>'
+          : '<div class="pd-shot frame" style="--c:var(--' + esc(p.color || "sky") + ')"><div class="pd-keys">' +
+              p.shots.map(function(s, n){ return '<span style="animation-delay:' + (n * 0.035) + 's"><img class="px" src="' + esc(s) + '" alt=""></span>'; }).join("") +
+            '</div></div>') +
         '<div class="pd-info">' +
           '<span class="label">' + esc(CATNAME[p.category] || p.category) + (p.official ? " · Official" : " · Community") + '</span>' +
           '<h1><img class="px" src="' + esc(p.icon) + '" alt="">' + esc(p.name) + '</h1>' +
