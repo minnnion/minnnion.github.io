@@ -268,8 +268,10 @@ section{display:flex;flex-direction:column;gap:24px}
 .plug h3{font-size:18px;display:flex;align-items:center;gap:8px;min-width:0}
 .plug h3 img{width:28px;height:28px;flex:none;border:3px solid var(--ink);background:var(--chrome);padding:2px}
 /* A plugin with a profile picture: the deck from the app, framed, in the card's top */
-.plug .shot.prev{aspect-ratio:5/3;padding:12px}
-.plug .shot.prev img.deck,.pd-shot img.deck{position:relative;display:block;width:100%;height:100%;object-fit:contain;border:3px solid var(--ink);box-shadow:3px 3px 0 var(--shadow);background:var(--chrome)}
+.plug .shot.prev{aspect-ratio:5/3}
+/* The whole deck fits whatever its grid (5 x 3, 4 x 3, 3 x 3); the shadow follows the picture */
+.plug .shot.prev img.deck{position:absolute;inset:12px;width:calc(100% - 24px);height:calc(100% - 24px);object-fit:contain;filter:drop-shadow(3px 3px 0 var(--shadow))}
+.pd-shot img.deck{position:relative;display:block;max-width:100%;max-height:420px;margin:0 auto;border:3px solid var(--ink);box-shadow:3px 3px 0 var(--shadow);background:var(--chrome)}
 .plug:hover .shot.prev img.deck{animation:hop .5s var(--step) both}
 .pd-shot.prev{padding:16px}
 .plug p{font-size:14px;color:var(--slate)}
