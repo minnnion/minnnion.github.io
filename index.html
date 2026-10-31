@@ -112,6 +112,26 @@ section{display:flex;flex-direction:column;gap:24px}
 .phone{position:relative;z-index:2;width:100%;max-width:540px;background:var(--chrome);border:4px solid var(--ink);box-shadow:10px 10px 0 var(--shadow);padding:12px 30px 14px;animation:float 6s ease-in-out infinite}
 .phone::before{content:"";position:absolute;left:10px;top:50%;width:8px;height:56px;margin-top:-28px;background:#000}
 @keyframes float{50%{transform:translateY(-6px)}}
+/* The phone is drawn as the desktop app's window: title bar, rail, page bar, grid, inspector bar */
+.phone.appwin{padding:0;max-width:560px;background:#1e2433;color:#e4eaf6;font-family:var(--f-pix);font-size:12px;overflow:hidden}
+.phone.appwin::before{display:none}
+.aw-body{display:grid;grid-template-columns:44px minmax(0,1fr)}
+.aw-rail{display:flex;flex-direction:column;gap:4px;padding:6px 4px;background:#262e43;border-right:3px solid #000}
+.aw-rail span{display:grid;place-items:center;height:30px;border:2px solid transparent}
+.aw-rail span svg{width:16px;height:16px}
+.aw-rail span.on{background:var(--mint);border-color:#e4eaf6;color:#1e2433}
+.aw-rail .sp{flex:1;height:auto;border:0}
+.aw-main{display:flex;flex-direction:column;gap:8px;min-width:0;padding:8px;background-color:#1e2433;background-image:radial-gradient(#2a3248 1.5px,transparent 1.5px);background-size:12px 12px}
+.aw-top{display:flex;gap:4px;align-items:center;flex-wrap:wrap;font-size:11px}
+.aw-top b{margin-right:auto}
+.aw-top b span{color:#fff}
+.aw-insp{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px;align-items:center;margin:0 -8px -8px;padding:6px 8px;background:#262e43;border-top:3px solid #000}
+.aw-insp b{font-size:12px}
+.aw-insp .am-dim{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.appwin .deck{gap:4px}
+.appwin .key{box-shadow:none;border-color:#e4eaf6}
+.appwin .key.sel{outline:3px solid #c93c41;outline-offset:1px}
+.appwin .slot{border-color:#3a4560}
 .deck-cap{display:flex;justify-content:space-between;align-items:center;gap:10px;font-family:var(--f-mono);font-size:11px;color:var(--chrome-dim);letter-spacing:.06em;margin-bottom:10px}
 .tabs{display:flex;gap:6px;flex-wrap:wrap}
 .tabs button{font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;background:none;border:2px solid #3a4560;color:var(--chrome-dim);padding:2px 8px;cursor:pointer}
@@ -691,6 +711,8 @@ dialog.inst[open]{animation:rise .35s steps(5,end)}
 .bug-form{padding:18px;display:flex;flex-direction:column;gap:12px}
 .two-f{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px}
 .bug-out{padding:16px;display:flex;flex-direction:column;gap:8px;position:sticky;top:calc(env(safe-area-inset-top,0px) + 80px)}
+.bug-form input[type=file]{font:inherit;font-size:14px}
+.bug-out .bar2 .btn{margin-left:6px}
 .bug-out pre{min-height:260px;max-height:520px;white-space:pre-wrap;overflow-wrap:anywhere;margin:0}
 
 /* GIF and image makers */
@@ -851,8 +873,10 @@ footer .f-brand p{margin-top:8px;max-width:34ch}
   .band,.soonview{padding:22px}
   main{gap:72px}
   .under{grid-template-columns:minmax(0,1fr)}
-  .phone{padding-inline:20px}
+  .phone:not(.appwin){padding-inline:20px}
   .phone::before{left:6px;width:6px}
+  .aw-top .am-b{display:none}
+  .aw-insp .am-row .am-b:not(.go){display:none}
   .key .lbl{font-size:9px}
   .wiz{grid-template-columns:minmax(0,1fr)}
   .wiz-side{display:none}
@@ -972,12 +996,19 @@ footer .f-brand p{margin-top:8px;max-width:34ch}
       <p class="label load d4">Desktop app 1.0.1 · phone app Minnionphone</p>
     </div>
 
-    <div class="stage load d2" id="stage" aria-label="Real pages from the app on a 5 by 3 phone deck, with each press shown in the PC log">
-      <div class="phone" id="phone">
-        <div class="deck-cap"><span>MY PROFILE · GENERAL</span><div class="tabs" id="sizes" hidden></div><span>5 × 3</span></div>
-        <div class="deck" id="deck"></div>
+    <div class="stage load d2" id="stage" aria-label="The Deck page of the Minniondeck desktop app, a 5 by 3 page, with each press shown in the PC log">
+      <div class="phone appwin" id="phone">
+        <div class="am-bar"><span class="am-logo"></span><b>Minniondeck</b><span class="am-crumb">My profile / Page 1</span><span class="am-win" aria-hidden="true"><i>_</i><i>□</i><i>✕</i></span></div>
+        <div class="aw-body">
+          <div class="aw-rail" id="aw-rail" aria-hidden="true"></div>
+          <div class="aw-main">
+            <div class="aw-top"><b>My profile / <span>Page 1</span></b><span class="am-b">5 × 3 grid ▾</span><span class="am-b">Edit layout</span><span class="am-b">Show on phones</span><div class="tabs" id="sizes" hidden></div></div>
+            <div class="deck" id="deck"></div>
+            <div class="aw-insp" aria-live="polite"><div><b id="aw-name">Mute mic</b><div class="am-dim" id="aw-meta">Mute mic · 1 × 1 button</div></div><div class="am-row" aria-hidden="true"><span class="am-b go">Edit button</span><span class="am-b">Press</span><span class="am-b">Duplicate</span><span class="am-b">⋯</span></div></div>
+          </div>
+        </div>
       </div>
-      <p class="note">Built-in keys from the app. Tap a key to try it.</p>
+      <p class="note">The Deck page of the desktop app, with its built-in keys. Your phone shows the same 5 × 3 page. Tap a key to try it.</p>
 
       <div class="under">
         <div class="pc frame">
@@ -1897,7 +1928,7 @@ export!(MyPlugin);</code></pre>
   </section>
 
   <section aria-labelledby="ct-bug-h" id="ct-bug" class="rv">
-    <div class="head"><span class="label">Report a bug</span><h2 id="ct-bug-h">Write a good bug report</h2><p>Fill this in and copy the report. It's laid out the way GitHub shows it.</p></div>
+    <div class="head"><span class="label">Report a bug</span><h2 id="ct-bug-h">Write a good bug report</h2><p>Fill this in and press Send report: it reaches the developer with your log file. Copy gives you the text instead.</p></div>
     <div class="bugger">
       <form class="frame bug-form" id="bug-form" novalidate>
         <label class="fld">What went wrong, in one line<input type="text" name="title" maxlength="100" placeholder="The phone disconnects when the PC sleeps"></label>
@@ -1918,12 +1949,13 @@ export!(MyPlugin);</code></pre>
           <label class="fld">Phone and Android version<input type="text" name="phone" placeholder="Pixel 8, Android 15"></label>
           <label class="fld">Sim, if any<input type="text" name="sim" placeholder="MSFS 2024"></label>
         </div>
-        <label class="chk"><input type="checkbox" name="log"><span>I'll attach <code>minniondeck.log</code> (Settings › About › Open logs folder)</span></label>
+        <label class="fld">Log file, optional (up to 2 MB)<input type="file" name="logfile" accept=".log,.txt,.zip,text/plain"><span class="mk-count">It's <code>minniondeck.log</code>: Settings › About › Open logs folder.</span></label>
+        <label class="fld">How to reach you, optional<input type="text" name="contact" maxlength="200" placeholder="Email or Discord name, if you'd like an answer"></label>
       </form>
       <div class="frame bug-out">
-        <div class="bar2"><b>Your report</b><span class="grow"></span><button type="button" class="btn mint" id="bug-copy" style="font-size:15px;padding:5px 12px">Copy</button></div>
+        <div class="bar2"><b>Your report</b><span class="grow"></span><button type="button" class="btn plain" id="bug-copy" style="font-size:15px;padding:5px 12px">Copy</button><button type="button" class="btn mint" id="bug-send" style="font-size:15px;padding:5px 12px">Send report</button></div>
         <pre id="bug-text" aria-live="polite"></pre>
-        <p class="mk-count" id="bug-msg">Paste it into a new issue once the repositories are public on GitHub. The version is in Settings › About.</p>
+        <p class="mk-count" id="bug-msg" aria-live="polite">Send report sends it, with the log file, straight to the Minniondeck developer. The version is in Settings › About.</p>
       </div>
     </div>
   </section>
@@ -2055,6 +2087,33 @@ export!(MyPlugin);</code></pre>
 <script>
 (function(){
   var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+  /* Bug reports and visit counts go through the relay (minnionwebsite/relay) to a private repo.
+     A view is the page name; a click is a download or a link off the site. No cookies and no id
+     that lasts: sid is random for this tab only. Do Not Track and Global Privacy Control are kept. */
+  var RELAY = "", relayQueue = [];
+  // relay.json (written by relay/setup.ps1) says where the relay is; views wait until it is known
+  fetch("relay.json", {cache:"no-store"}).then(function(r){ return r.ok ? r.json() : {}; }).then(function(j){
+    RELAY = /^https:\/\/[\w.-]+$/.test(j.url || "") ? j.url : "";
+    var q = relayQueue; relayQueue = null;
+    q.forEach(function(a){ track(a[0], a[1]); });
+  }, function(){ relayQueue = null; });
+  var SID = (function(){ try { var x = sessionStorage.getItem("md.sid"); if (!x){ x = Math.random().toString(36).slice(2, 12); sessionStorage.setItem("md.sid", x); } return x; } catch (e) { return "x" + Math.random().toString(36).slice(2, 10); } })();
+  var quiet = navigator.doNotTrack === "1" || navigator.globalPrivacyControl === true;
+  var lastView = "";
+  function track(type, name){
+    if (relayQueue){ relayQueue.push([type, name]); return; }
+    if (!RELAY || quiet) return;
+    if (type === "view"){ if (name === lastView) return; lastView = name; }
+    var body = JSON.stringify({sid:SID, type:type, name:name, ref:type === "view" && !document.referrer.startsWith(location.origin) ? document.referrer.replace(/^https?:\/\//, "").split("/")[0] : "", lang:navigator.language, width:innerWidth});
+    try { if (!(navigator.sendBeacon && navigator.sendBeacon(RELAY + "/hit", new Blob([body], {type:"text/plain"})))) fetch(RELAY + "/hit", {method:"POST", body:body, keepalive:true}); } catch (e) {}
+  }
+  document.addEventListener("click", function(e){
+    var a = e.target.closest("a[href]");
+    if (!a) return;
+    var href = a.getAttribute("href");
+    if (a.hasAttribute("download") || /\/releases\/|\.(exe|apk|msi|zip|mdplugin|mdprofile)(\?|$)/i.test(href)) track("event", "download:" + href.split("/").pop().slice(0, 80));
+    else if (/^https?:/.test(href) && a.host !== location.host) track("event", "out:" + a.host);
+  }, true);
 
   /* The four sim types as colour pixel art, in the same 16 × 16 style as the app logos */
   var CAT_ART = {"flight":{"c":{"k":"1e2433","w":"ffffff","b":"4c97d6","g":"c6d3e2","r":"ff5a5f"},"p":[".......kk.......","......kbbk......","......kwwk......","......kwwk......","......kwwk......",".....kwwwwk.....","....kwwwwwwk....","..kkwwwwwwwwkk..",".kwwwwwwwwwwwwk.","kwwgkkwwwwkkgwwk","kkkkk.kwwk.kkkkk","......kwwk......","......kwwk......",".....kwrrwk.....","....kwrkkrwk....","....kkk..kkk...."]},"truck":{"c":{"k":"1e2433","w":"ffffff","r":"ff5a5f","b":"7cc4ff","g":"c6d3e2","y":"ffc93c"},"p":["................","................","................","kkkkkkkkkk......","kwwwwwwwwk.kkk..","kwwwwwwwwk.kbbk.","kwwwwwwwwk.kbbkk","kwwwwwwwwkkkrrrk","kwwwwwwwwkrrrrrk","kkkkkkkkkkkrrryk","kkkkkkkkkkkkkkkk",".kkk.kkk...kkk..",".kgk.kgk...kgk..",".kkk.kkk...kkk..","................","................"]},"racing":{"c":{"k":"1e2433","w":"ffffff","y":"ffc93c","b":"7cc4ff","g":"c6d3e2"},"p":["................",".kwkwk..........",".kkwkw..........",".kwkwk..........",".k..............",".k..............","......kkkk......","....kkbbbkk.....","kk.kwwwwwwwkkk..","kwkwwwwwwwwwwwk.","kwwwyyyyyywwwwwk","kkkkkkkkkkkkkkkk",".kkk.......kkk..",".kgk.......kgk..",".kkk.......kkk..","................"]},"general":{"c":{"k":"1e2433","d":"262e43","m":"5fd0a8","s":"7cc4ff","y":"ffc93c","c":"ff5a5f","p":"ffb38a","w":"ffffff"},"p":["................","................",".kkkkkkkkkkkkkk.",".kddddddddddddk.",".kdmmmdsssdyyyk.",".kdmmmdsssdyyyk.",".kdmmmdsssdyyyk.",".kddddddddddddk.",".kdcccdpppdwwwk.",".kdcccdpppdwwwk.",".kdcccdpppdwwwk.",".kddddddddddddk.",".kkkkkkkkkkkkkk.","................","................","................"]}};
@@ -2097,6 +2156,7 @@ export!(MyPlugin);</code></pre>
     contribV.hidden = view !== "contribute";
     tourV.hidden = view !== "tour";
     makerOpen(view);
+    track("view", view + (parts[1] && view === "marketplace" || parts[1] && view === "docs" ? "/" + parts[1] : ""));
     soon.hidden = !page;
     if (view === "download") wizStart();
     if (view === "marketplace") mkOpen(parts[1] || "");
@@ -2177,7 +2237,7 @@ export!(MyPlugin);</code></pre>
   var KEYMAP = {};
   KEYS.forEach(function(k){ KEYMAP[k.l] = k; });
   var SIZES = [];
-  var state = {cols:5, rows:3, mute:false, live:false, rec:0, flash:""};
+  var state = {cols:5, rows:3, mute:false, live:false, rec:0, flash:"", sel:"Mute mic"};
   var pausedUntil = 0;
   var deck = document.getElementById("deck");
   var sizes = document.getElementById("sizes");
@@ -2226,7 +2286,7 @@ export!(MyPlugin);</code></pre>
       var k = s.k, lk = lookOf(k);
       var b = document.createElement("button");
       b.type = "button";
-      b.className = "key" + (s.w === 1 && s.h === 1 ? " sq" : "") + (lk.cls || "");
+      b.className = "key" + (s.w === 1 && s.h === 1 ? " sq" : "") + (lk.cls || "") + (k.l === state.sel ? " sel" : "");
       b.style.gridColumn = (s.x + 1) + " / span " + s.w;
       b.style.gridRow = (s.y + 1) + " / span " + s.h;
       b.style.background = COL[lk.bg];
@@ -2361,9 +2421,19 @@ export!(MyPlugin);</code></pre>
       if (!reduce && btn.isConnected){ btn.classList.add("a-" + anim.type); setTimeout(function(){ btn.classList.remove("a-" + anim.type); }, 700); }
     }
   }
+  function inspect(k){
+    var lk = lookOf(k), p = pack(state.cols, state.rows).keys.filter(function(x){ return x.k === k; })[0] || {w:1, h:1};
+    var does = k.act === "mute" ? "Mute or unmute the mic" : k.act === "live" ? "3 steps in order" : k.act === "record" ? "Keys · Win+Alt+R" : (k.log || k.l);
+    document.getElementById("aw-name").textContent = lk.t;
+    document.getElementById("aw-meta").textContent = does + " · " + p.w + " × " + p.h + " button";
+  }
   function press(btn){
     var k = KEYMAP[btn.dataset.l];
     if (!k) return;
+    state.sel = k.l;
+    deck.querySelectorAll(".key.sel").forEach(function(x){ x.classList.remove("sel"); });
+    btn.classList.add("sel");
+    inspect(k);
     btn.classList.add("hit");
     setTimeout(function(){ btn.classList.remove("hit"); }, 220);
     send(btn);
@@ -2375,6 +2445,7 @@ export!(MyPlugin);</code></pre>
     if (btn) press(btn);
   }
   render({});
+  inspect(KEYMAP[state.sel]);
   addLog("Deck · My profile opened");
 
   var demo = ["Mute mic","Record","Go live","Next track","Volume up","Record","Play or pause","Screenshot","Mute mic","Open notes","Clip last 30s","Go live","Record","Be right back"], oi = 0;
@@ -2846,7 +2917,7 @@ export!(MyPlugin);</code></pre>
                ["Pages and folders", "+ Page and + Folder make more. Double-click a name, or press F2, to rename it."],
                ["Page tools", "The grid size (3 × 3, 4 × 3 or 5 × 3), Edit layout to move and resize buttons, and what your phones see."],
                ["Buttons", "Click an empty key to make a button. Click a button to pick it, double-click to edit it."],
-               ["Inspector", "What the picked button does. Edit it, Press it to test, Duplicate, move it to another page, or delete it."]],
+               ["Inspector", "The picked button: its name, what it does and its size. Edit it, Press it to test, or Duplicate it; ⋯ moves it to another page or deletes it."]],
       html: function(){
         var g = [trGlyphKey("mic", "#f7fafc"), trKey("obsstudio"), trKey("spotify"), trKey("discord"), trKey("youtube"),
                  trKey("msfs2024"), trGlyphKey("camera", "#5fd0a8"), trGlyphKey("lock", "#ffb38a"), trKey("twitch"), '<span class="e">+</span>',
@@ -2858,43 +2929,47 @@ export!(MyPlugin);</code></pre>
           '<div class="am-page on">Page 1<i>9</i></div><div class="am-page">Streaming<i>6</i></div><div class="am-page">▸ Flight</div></aside>' +
           '<div class="am-main"><div class="am-top" style="position:relative">' + hs(3, "right:-6px;top:-12px") + '<b>My profile / Page 1</b><span class="am-b">5 × 3 grid ▾</span><span class="am-b">Edit layout</span><span class="am-b">Show on phones</span></div>' +
           '<div class="am-grid" style="position:relative">' + hs(4, "left:-8px;top:-8px") + g.join("") + '</div>' +
-          '<div class="am-p am-insp">' + hs(5, "right:-8px;top:-10px") + '<div><b>Spotify</b><div class="am-dim">Play or pause · 1 × 1 button</div></div><div class="am-row"><span class="am-b go">Edit button</span><span class="am-b">Press</span><span class="am-b">Duplicate</span></div></div></div></div>';
+          '<div class="am-p am-insp">' + hs(5, "right:-8px;top:-10px") + '<div><b>Spotify</b><div class="am-dim">Play or pause · 1 × 1 button</div></div><div class="am-row"><span class="am-b go">Edit button</span><span class="am-b">Press</span><span class="am-b">Duplicate</span><span class="am-b">⋯</span></div></div></div></div>';
       } },
     { id: "profiles", name: "Profiles", icon: "people", crumb: "Profiles",
       lead: "A profile is a set of pages and folders: one for streaming, one for flying, one for every day.",
-      points: [["Your profiles", "Each with its own colour and pages. Use this profile makes it the one on your deck."],
-               ["Switch by itself", "Pick an app for a profile, and Minniondeck switches when that app comes to the front."],
-               ["Share", "Export a profile as a .mdprofile file. Double-click one, or use Import, to add it."]],
+      points: [["Your profiles", "Each card has the profile's name, colour and how many pages and buttons it has. Use this profile puts it on your deck."],
+               ["Switch by itself", "Turn on Switch automatically, then pick an app for a profile: Minniondeck switches when that app comes to the front."],
+               ["Share", "+ New profile, or Import a profile… to add a .mdprofile file. Each card can Duplicate, Export or Delete its profile."]],
       html: function(){
-        var card = function(name, colour, rule, n){ return '<div class="am-p am-card"><div class="sw"><i style="background:' + colour + '"></i><b>' + name + '</b></div><span class="am-dim">' + rule + '</span><div class="am-row"><span class="am-b' + (n ? "" : " on") + '">' + (n ? "Use this profile" : "In use") + '</span><span class="am-b">Duplicate</span><span class="am-b">Export</span></div></div>'; };
-        return '<div class="am-row" style="position:relative"><b style="margin-right:auto">Profiles</b><span class="am-b go">+ New profile</span><span class="am-b">Import…</span>' + hs(3, "right:-6px;top:-12px") + '</div>' +
+        var sws = function(on){ return '<div class="am-row" style="gap:3px">' + ["#5fd0a8", "#7cc4ff", "#b79cff", "#ffb38a", "#ff5a5f", "#ffc93c"].map(function(c){ return '<i style="display:inline-block;width:12px;height:12px;border:2px solid ' + (c === on ? "#e4eaf6" : "#000") + ';background:' + c + '"></i>'; }).join("") + '</div>'; };
+        var card = function(name, colour, when, stats, inUse){ return '<div class="am-p am-card"><div class="sw"><i style="background:' + colour + '"></i><b>' + name + '</b>' + (inUse ? '<span class="am-b on" style="margin-left:auto">In use</span>' : "") + '</div><span class="am-dim">' + stats + '</span><span class="am-cap">Switch to this profile when</span><span class="am-b">' + when + ' ▾</span>' + sws(colour) + (inUse ? "" : '<span class="am-b go">Use this profile</span>') + '<div class="am-row"><span class="am-b">Duplicate</span><span class="am-b">Export</span><span class="am-b">Delete</span></div></div>'; };
+        return '<div class="am-row" style="position:relative"><b style="margin-right:auto">Profiles</b><span class="am-dim">Switch automatically</span><span class="am-sw"></span>' + hs(2, "right:-6px;top:-12px") + '</div>' +
+          '<p class="am-dim" style="margin:0">A profile is a set of pages and folders. Minniondeck can switch to a profile when an app comes to the front.</p>' +
+          '<div class="am-row" style="position:relative"><span class="am-b">+ New profile</span><span class="am-b">Import a profile…</span>' + hs(3, "left:200px;top:-8px") + '</div>' +
           '<div class="am-cards" style="position:relative">' + hs(1, "left:-8px;top:-8px") +
-          card("My profile", "#7cc4ff", "Switched by hand", 0) + card("Streaming", "#ff5a5f", "Switches when OBS Studio is in front", 1) +
-          '<div style="position:relative">' + hs(2, "right:-6px;top:-8px") + card("Flying", "#5fd0a8", "Switches when MSFS 2024 is in front", 1) + '</div>' +
-          card("Music", "#b79cff", "Switched by hand", 1) + '</div><p class="am-dim">Profiles save automatically.</p>';
+          card("My profile", "#7cc4ff", "Never", "3 pages, 1 folder, 21 buttons", 1) + card("Streaming", "#ff5a5f", "OBS Studio is in front", "2 pages, 0 folders, 14 buttons", 0) + '</div>' +
+          '<p class="am-dim" style="margin:0">Profiles save automatically.</p>';
       } },
     { id: "phones", name: "Phones", icon: "phone", crumb: "Phones",
       lead: "Pair phones and see which are connected. The pairing code only works while this page is open.",
       points: [["Paired phones", "Each phone, whether it's connected, and its Android and app version. Rename one, or forget it."],
-               ["Pair a new phone", "Scan the QR code with the phone. It carries this PC's address, a one-time code and a check for the PC's certificate."],
+               ["Pair a new phone", "Install Minniondeck on the phone, tap Add a PC and scan the code. It carries this PC's address, a one-time code and a check for the PC's certificate."],
                ["The code", "6 digits, good for 5 minutes and 5 tries. Typing it in works too."],
-               ["Updates", "Shows when a paired phone has an older app."]],
+               ["Phone app updates", "The newest phone app version, and Push update to phones. Phones download updates themselves."]],
       html: function(){
         var ph = function(name, on, detail){ return '<div class="am-p" style="display:flex;justify-content:space-between;gap:6px;align-items:center"><div><b>' + name + '</b><div class="am-dim">' + detail + '</div></div><span class="am-b' + (on ? " on" : "") + '">' + (on ? "Connected" : "Offline") + '</span></div>'; };
-        return '<div class="am-deck" style="grid-template-columns:minmax(0,1fr) auto">' +
-          '<div style="display:flex;flex-direction:column;gap:6px;position:relative">' + hs(1, "left:-8px;top:-8px") + '<span class="am-cap">Paired phones</span>' + ph("Pixel 8", 1, "Android 15 · app 1.0") + ph("Galaxy Tab", 0, "Android 14 · app 1.0") +
-          '<div class="am-p" style="position:relative">' + hs(4, "right:-8px;top:-10px") + '<b>Phone app</b><div class="am-dim">1.0 is the newest. Phones update themselves.</div></div></div>' +
-          '<div class="am-p" style="display:flex;flex-direction:column;align-items:center;gap:6px;position:relative">' + hs(2, "left:-8px;top:-8px") + '<span class="am-cap">Pair a phone</span><div class="am-qr">' + trQr(5) + '</div>' +
-          '<div style="position:relative">' + hs(3, "right:-24px;top:-4px") + '<b style="font-family:var(--f-mono)">482 913</b></div><span class="am-dim">Expires in 5 minutes</span></div></div>';
+        return '<b>Phones</b>' +
+          '<div style="display:flex;flex-direction:column;gap:6px;position:relative">' + hs(1, "left:-8px;top:-8px") + '<span class="am-cap">Paired phones</span>' + ph("Pixel 8", 1, "Android 15 · app 1.0") + ph("Galaxy Tab", 0, "Android 14 · app 1.0") + '</div>' +
+          '<div class="am-p" style="border-style:dashed;display:flex;gap:10px;align-items:center;position:relative">' + hs(2, "left:-8px;top:-8px") + '<div class="am-qr" style="width:72px;height:72px">' + trQr(5) + '</div>' +
+          '<div style="display:flex;flex-direction:column;gap:3px"><b>Pair a new phone</b><span class="am-dim">1. Install Minniondeck on the phone and open it.</span><span class="am-dim">2. Tap Add a PC.</span><span class="am-dim">3. Scan this code, or type the number.</span>' +
+          '<div style="position:relative;align-self:flex-start">' + hs(3, "right:-24px;top:-4px") + '<b style="font-family:var(--f-mono)">482 913</b> <span class="am-dim">· expires in 5 minutes</span></div></div></div>' +
+          '<div class="am-p" style="display:flex;flex-direction:column;gap:4px;position:relative">' + hs(4, "right:-8px;top:-10px") + '<b>Phone app updates</b><span class="am-dim">1.0 is the newest. Phones download updates themselves.</span><span class="am-b go" style="align-self:flex-start">Push update to phones</span></div>';
       } },
     { id: "testing", name: "Testing", icon: "flask", crumb: "Testing",
-      lead: "Things being tried out before they go on the deck.",
-      points: [["Offline speech", "Type something and hear it, with 37 English voices that run on your PC. Comes with the Speech plugin."],
-               ["Who asked", "Any plugin can ask Minniondeck to speak, for callouts and alerts. Each request is listed here."]],
+      lead: "Try things out here before they go on the deck.",
+      points: [["Speech", "Type something and hear it, with 37 English voices that run on your PC. Comes with the Speech plugin."],
+               ["Last lines", "Lines asked for here, or by any plugin (callouts and alerts), show up here."]],
       html: function(){
-        return '<div class="am-p" style="display:flex;flex-direction:column;gap:6px;position:relative">' + hs(1, "right:-8px;top:-10px") + '<b>Speech</b><span class="am-dim">Offline, 37 English voices</span>' +
-          '<div class="am-p" style="background:#1e2433">Gear down. Flaps one.</div><div class="am-row"><span class="am-b">Voice ▾</span><span class="am-b go">Speak</span><span class="am-b">Stop</span></div></div>' +
-          '<div class="am-p" style="position:relative">' + hs(2, "right:-8px;top:-10px") + '<span class="am-cap">Who asked</span><div class="am-field"><span>A plugin</span><span class="am-dim">"Lights on."</span></div><div class="am-field"><span>You, on this page</span><span class="am-dim">"Gear down. Flaps one."</span></div></div>';
+        return '<b>Testing</b><span class="am-dim">Try things out here before they go on the deck.</span>' +
+          '<div class="am-p" style="display:flex;flex-direction:column;gap:6px;position:relative">' + hs(1, "right:-8px;top:-10px") + '<b>Speech</b><span class="am-dim">Offline, 37 English voices</span>' +
+          '<div class="am-p" style="background:#1e2433">Gear down. Flaps one.</div><div class="am-row"><span class="am-b">Voice ▾</span><span class="am-b go">Speak</span><span class="am-b">Stop</span></div>' +
+          '<div style="position:relative">' + hs(2, "right:-8px;top:-4px") + '<span class="am-cap">Last lines</span><div class="am-field"><span>A plugin</span><span class="am-dim">"Lights on."</span></div><div class="am-field"><span>You, on this page</span><span class="am-dim">"Gear down. Flaps one."</span></div></div></div>';
       } },
     { id: "settings", name: "Settings", icon: "gear", crumb: "Settings",
       lead: "Everything you can set, in tabs down the side.",
@@ -2914,6 +2989,7 @@ export!(MyPlugin);</code></pre>
       } }
   ];
   var amRail = document.getElementById("am-rail"), amView = document.getElementById("am-view");
+  document.getElementById("aw-rail").innerHTML = ["grid", "people", "phone", "flask", "", "gear"].map(function(g, i){ return g ? '<span' + (i ? "" : ' class="on"') + '>' + rowsSvg(TR_GL[g]) + '</span>' : '<span class="sp"></span>'; }).join("");
   TR.forEach(function(t, i){
     if (t.id === "settings") { var sp = document.createElement("span"); sp.className = "sp"; amRail.appendChild(sp); }
     var b = document.createElement("button");
@@ -2984,7 +3060,7 @@ export!(MyPlugin);</code></pre>
   });
   var bugForm = document.getElementById("bug-form"), bugText = document.getElementById("bug-text");
   function bugReport(){
-    var v = function(n){ var el = bugForm.elements[n]; return el.type === "checkbox" ? el.checked : el.value.trim(); };
+    var v = function(n){ var el = bugForm.elements[n]; return el.type === "file" ? (el.files[0] ? el.files[0].name : "") : el.value.trim(); };
     var or = function(t){ return t || "_Not filled in_"; };
     var lines = [
       "## " + (v("title") || "Short title of the bug"),
@@ -3004,17 +3080,41 @@ export!(MyPlugin);</code></pre>
       "- Minniondeck " + (v("version") || "?") + " on " + v("os"),
       "- Phone: " + (v("phone") || "not used"),
       "- Sim: " + (v("sim") || "none"),
-      "- Log attached: " + (v("log") ? "yes" : "no")
+      "- Log attached: " + (v("logfile") || "no")
     ];
     bugText.textContent = lines.join("\n");
   }
   bugForm.addEventListener("input", bugReport);
   bugForm.addEventListener("change", bugReport);
   bugReport();
+  // Send: through the relay into the private reports repo
+  var bugSend = document.getElementById("bug-send");
+  bugSend.addEventListener("click", function(){
+    var msg = document.getElementById("bug-msg"), el = bugForm.elements;
+    var f = el.logfile.files[0];
+    if (!el.title.value.trim() && !el.actual.value.trim()){ msg.textContent = "Say what went wrong first: the one line at the top, or What happened."; el.title.focus(); return; }
+    if (f && f.size > 2 * 1024 * 1024){ msg.textContent = "The log file is over 2 MB. Send the last part of it instead."; return; }
+    if (!RELAY){ msg.textContent = "Sending isn't set up yet. Copy the report instead."; return; }
+    var r = {page: location.hash.slice(1)};
+    ["title","area","plugin","steps","expected","actual","version","os","phone","sim","contact"].forEach(function(n){ r[n] = el[n].value.trim(); });
+    var body = new FormData();
+    body.append("report", JSON.stringify(r));
+    if (f) body.append("log", f, f.name);
+    bugSend.disabled = true; msg.textContent = "Sending…";
+    fetch(RELAY + "/report", {method:"POST", body:body}).then(function(res){
+      return res.json().catch(function(){ return {}; }).then(function(j){
+        if (!res.ok) throw new Error(j.error || "The report didn't go through. Try again, or copy it.");
+        msg.textContent = "Sent. Thank you! Your report number is " + j.id + ".";
+        track("event", "bug-report:" + r.area);
+        bugForm.reset(); bugReport();
+      });
+    }).catch(function(e){ msg.textContent = e.message && e.message !== "Failed to fetch" ? e.message : "Couldn't reach the server. Check your connection, or copy the report."; })
+      .then(function(){ bugSend.disabled = false; });
+  });
   document.getElementById("bug-copy").addEventListener("click", function(){
     var msg = document.getElementById("bug-msg"), done = function(t){ msg.textContent = t; };
     try {
-      navigator.clipboard.writeText(bugText.textContent).then(function(){ done("Copied. Paste it into a new issue once the repositories are public on GitHub."); }, function(){ done("Couldn't copy. Select the report and copy it yourself."); });
+      navigator.clipboard.writeText(bugText.textContent).then(function(){ done("Copied."); }, function(){ done("Couldn't copy. Select the report and copy it yourself."); });
     } catch (err) { done("Couldn't copy. Select the report and copy it yourself."); }
   });
 
