@@ -108,33 +108,42 @@
     {
       "id": "minnion_sysmon",
       "name": "System Monitor",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "api": 2,
       "category": "general",
       "official": true,
       "author": "Minniondeck",
       "color": "sky",
       "icon": "icons/sysmon-cpu.png",
-      "summary": "CPU, memory, disk space and network speed, live.",
-      "about": "Shows how busy your PC is, right on your keys, read straight from Windows. Press CPU, memory or network to open Task Manager, or a disk key to open that drive.",
+      "summary": "CPU, GPU, memory, disk, network and the busiest app, live.",
+      "about": "Shows how busy your PC is, right on your keys, read straight from Windows: CPU, GPU and memory use, free disk space, network speed, and the app using the most CPU, memory or GPU right now. Press a key to open Task Manager, or a disk key to open that drive.",
       "shots": [
         "icons/sysmon-cpu.png",
         "icons/sysmon-ram.png",
         "icons/sysmon-disk.png",
-        "icons/sysmon-net.png"
+        "icons/sysmon-net.png",
+        "icons/sysmon-gpu.png",
+        "icons/sysmon-top.png"
       ],
       "actions": [
         "CPU use",
         "Memory use",
         "Disk space",
-        "Network speed"
+        "Network speed",
+        "GPU use",
+        "Top app"
       ],
       "settings": [],
       "needs": [],
-      "file": "minnion_sysmon-0.1.0.mdplugin",
-      "size": 157678,
-      "sha256": "9430f86967d05a4d1e6b8e04921c7bd35c2fc112c16a113bffd4359e43edb932",
+      "file": "minnion_sysmon-0.2.0.mdplugin",
+      "size": 176545,
+      "sha256": "ab7979210a9a946681c4bc51b4d90fd65e418ca414e4e8726a48084cbbe7e19d",
       "versions": [
+        {
+          "v": "0.2.0",
+          "size": 176545,
+          "sha256": "ab7979210a9a946681c4bc51b4d90fd65e418ca414e4e8726a48084cbbe7e19d"
+        },
         {
           "v": "0.1.0",
           "size": 157678,
@@ -182,15 +191,15 @@
     {
       "id": "minnion_weather",
       "name": "Weather",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "api": 2,
       "category": "general",
       "official": true,
       "author": "Minniondeck",
       "color": "lilac",
       "icon": "icons/weather-weather.png",
-      "summary": "The weather now for any town, on a key.",
-      "about": "Temperature and conditions with a matching picture, updated every 15 minutes. Press for the wind too. Weather data by Open-Meteo.com, free and with no account.",
+      "summary": "The weather now, highs and lows, rain, wind, air quality and more.",
+      "about": "The weather for your home town (or any town) on your keys: now with a matching picture, today's high and low, feels like, chance of rain, humidity, wind, air quality, tomorrow, and the next sunrise or sunset. Updated every 15 minutes; press a key to hear it in full. Weather data by Open-Meteo.com, free and with no account.",
       "shots": [
         "icons/weather-weather.png",
         "icons/weather-sun.png",
@@ -198,19 +207,35 @@
         "icons/weather-rain.png",
         "icons/weather-snow.png",
         "icons/weather-storm.png",
-        "icons/weather-fog.png"
+        "icons/weather-fog.png",
+        "icons/weather-thermo.png",
+        "icons/weather-umbrella.png",
+        "icons/weather-drop.png",
+        "icons/weather-wind.png",
+        "icons/weather-leaf.png",
+        "icons/weather-sunrise.png",
+        "icons/weather-sunset.png"
       ],
       "actions": [
-        "Current weather"
+        "Current weather",
+        "Weather detail"
       ],
-      "settings": [],
+      "settings": [
+        "Home town",
+        "Units"
+      ],
       "needs": [
         "An internet connection"
       ],
-      "file": "minnion_weather-0.1.0.mdplugin",
-      "size": 1024164,
-      "sha256": "ee30a93f315be2e90a19b81d9e8274ecff87b4c797e9ce5fd654a8f7fad460b0",
+      "file": "minnion_weather-0.2.0.mdplugin",
+      "size": 1036845,
+      "sha256": "dfc21fd8e2ca236d4749c7b5ab55d39fdd0610f458376a72e0011d05be8c2e73",
       "versions": [
+        {
+          "v": "0.2.0",
+          "size": 1036845,
+          "sha256": "dfc21fd8e2ca236d4749c7b5ab55d39fdd0610f458376a72e0011d05be8c2e73"
+        },
         {
           "v": "0.1.0",
           "size": 1024164,
