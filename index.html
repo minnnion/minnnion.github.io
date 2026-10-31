@@ -49,15 +49,25 @@ img.px{image-rendering:pixelated;display:block;max-width:100%}
 
 /* top bar = the app's title bar */
 .top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:color-mix(in srgb,var(--chrome) 92%,transparent);backdrop-filter:blur(6px);color:var(--chrome-fg);border-bottom:4px solid var(--shadow)}
-.top .wrap{display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding-block:10px}
+.top .wrap{display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding-block:12px}
 .brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-size:22px;font-weight:700}
 .brand img{width:36px;height:36px;border:3px solid var(--chrome-fg);background:var(--chrome-2);box-shadow:3px 3px 0 #000}
 .brand:hover img{animation:jolt .4s var(--step)}
+.brand .ver{align-self:center;font-family:var(--f-mono);font-size:11px;font-weight:500;letter-spacing:.04em;color:var(--chrome-dim);border:2px solid #3a4560;padding:0 6px;line-height:18px}
 @keyframes jolt{25%{transform:translate(-2px,-2px)}50%{transform:translate(2px,0)}75%{transform:translate(0,2px)}}
-.nav{display:flex;gap:4px;flex-wrap:wrap;margin-left:auto}
-.nav a{display:flex;align-items:center;gap:6px;color:var(--chrome-fg);text-decoration:none;padding:5px 10px;border:3px solid transparent;font-size:16px;transition:border-color .15s}
-.nav a:hover{border-color:var(--chrome-dim)}
-.nav a[aria-current="page"]{background:var(--mint);color:var(--on-accent);border-color:var(--chrome-fg)}
+/* Links are quiet (dim until pointed at); the page you're on is bright with a mint bar under it.
+   A thin rule splits them into: the product, the makers, the project. Download is the one button. */
+.nav{display:flex;align-items:center;gap:2px;flex-wrap:wrap;margin-left:auto}
+.nav a{position:relative;display:flex;align-items:center;gap:6px;color:var(--chrome-dim);text-decoration:none;padding:8px 10px;font-size:15px;transition:color .15s,background-color .15s}
+.nav a:hover{color:var(--chrome-fg);background:var(--chrome-2)}
+.nav a[aria-current="page"]{color:var(--chrome-fg)}
+.nav a[aria-current="page"]::after{content:"";position:absolute;left:10px;right:10px;bottom:-1px;height:4px;background:var(--mint)}
+.nav-sep{width:3px;height:18px;background:#3a4560;margin:0 8px;flex:none}
+.nav a.nav-cta{margin-left:12px;padding:6px 16px;background:var(--mint);color:var(--on-accent);font-weight:700;border:3px solid var(--chrome-fg);box-shadow:3px 3px 0 #000;transition:transform .08s,box-shadow .08s}
+.nav a.nav-cta:hover{background:#7fe0bd;color:var(--on-accent);transform:translate(-1px,-1px);box-shadow:4px 4px 0 #000}
+.nav a.nav-cta:active{transform:translate(3px,3px);box-shadow:0 0 0 #000}
+.nav a.nav-cta[aria-current="page"]{background:var(--sun)}
+.nav a.nav-cta::after{display:none}
 .nav .soon{font-family:var(--f-mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--chrome-dim)}
 .nav a[aria-current="page"] .soon{color:var(--on-accent)}
 
@@ -931,7 +941,11 @@ footer .f-brand p{margin-top:8px;max-width:34ch}
   .top .wrap{flex-wrap:wrap;padding-block:8px}
   .nav{display:none;width:100%;margin:0;padding:6px 0 4px;flex-direction:column;gap:4px;max-height:calc(100dvh - 80px);overflow-y:auto}
   .top.open .nav{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));animation:logIn .2s var(--step)}
-  .nav a{justify-content:flex-start;padding:10px 12px;font-size:17px;border-color:#3a4560}
+  .nav a{justify-content:flex-start;padding:10px 12px;font-size:17px;color:var(--chrome-fg);border:3px solid #3a4560}
+  .nav a[aria-current="page"]{background:var(--mint);color:var(--on-accent);border-color:var(--chrome-fg)}
+  .nav a[aria-current="page"]::after,.nav-sep{display:none}
+  .nav a.nav-cta{grid-column:1/-1;margin:4px 0 0;justify-content:center}
+  .brand .ver{display:none}
   .mk-tools{top:calc(env(safe-area-inset-top,0px) + 62px)}
   .dside{top:calc(env(safe-area-inset-top,0px) + 74px)}
 }
@@ -992,18 +1006,20 @@ footer .f-brand p{margin-top:8px;max-width:34ch}
 
 <header class="top">
   <div class="wrap">
-    <a class="brand" href="#home" data-view="home"><img class="px" src="icons/icon.png" alt="">Minniondeck</a>
+    <a class="brand" href="#home" data-view="home"><img class="px" src="icons/icon.png" alt="">Minniondeck<span class="ver" aria-label="version 1.0.1">1.0.1</span></a>
     <button type="button" class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="main-nav"><span class="mb-ic" aria-hidden="true"><i></i><i></i><i></i></span><span id="menu-label">Menu</span></button>
     <nav class="nav" id="main-nav" aria-label="Main">
       <a href="#home" data-view="home" aria-current="page">Home</a>
       <a href="#tour" data-view="tour">Tour</a>
-      <a href="#download" data-view="download">Download</a>
       <a href="#marketplace" data-view="marketplace">Marketplace</a>
+      <a href="#docs" data-view="docs">Docs</a>
+      <span class="nav-sep" aria-hidden="true"></span>
       <a href="#gifs" data-view="gifs">GIFs</a>
       <a href="#images" data-view="images">Images</a>
-      <a href="#docs" data-view="docs">Docs</a>
+      <span class="nav-sep" aria-hidden="true"></span>
       <a href="#contribute" data-view="contribute">Contribute</a>
       <a href="#about" data-view="about">About</a>
+      <a class="nav-cta" href="#download" data-view="download">Download</a>
     </nav>
   </div>
 </header>
