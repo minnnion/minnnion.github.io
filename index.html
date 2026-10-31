@@ -560,20 +560,21 @@ dialog.inst[open]{animation:rise .35s steps(5,end)}
 .tr-hero{display:flex;flex-direction:column;gap:14px;max-width:72ch}
 .tr-hero h1{font-size:clamp(36px,5vw,58px)}
 .tr-app{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:24px;align-items:start}
-.appmock{background:#1e2433;border:4px solid var(--ink);box-shadow:8px 8px 0 var(--shadow);color:#e4eaf6;font-family:var(--f-pix);font-size:12px;min-width:0;overflow:hidden}
-.am-bar{display:flex;align-items:center;gap:8px;padding:6px 8px;background:#0e1220;border-bottom:3px solid #000}
-.am-logo{width:14px;height:14px;background:var(--mint);border:2px solid #000}
-.am-crumb{color:#a4b0c8;font-size:11px}
+.appmock{background:#1c2232;border:4px solid var(--ink);box-shadow:8px 8px 0 var(--shadow);color:#e4eaf6;font-family:var(--f-pix);font-size:12px;min-width:0;overflow:hidden}
+.am-bar{display:flex;align-items:center;gap:8px;padding:5px 8px;background:#04060b}
+.am-logo{width:16px;height:16px;image-rendering:pixelated;flex:none}
+.am-crumb{color:#e4eaf6;font-size:11px}
+.am-crumb::before{content:"– "}
 .am-win{margin-left:auto;display:flex;gap:4px}
 .am-win i{font-style:normal;width:18px;height:16px;border:2px solid #e4eaf6;display:grid;place-items:center;font-size:9px}
 .am-body{display:grid;grid-template-columns:62px minmax(0,1fr);min-height:400px}
-.am-rail{display:flex;flex-direction:column;gap:4px;padding:6px 4px;background:#262e43;border-right:3px solid #000}
+.am-rail{display:flex;flex-direction:column;gap:4px;padding:6px 4px;background:#262e43;border-right:3px solid #e4eaf6}
 .am-rail button{font-family:var(--f-pix);font-size:10px;color:#e4eaf6;background:none;border:3px solid transparent;padding:4px 0;display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer}
 .am-rail button svg{width:20px;height:20px}
 .am-rail button:hover{border-color:#56627d}
 .am-rail button[aria-selected="true"]{background:var(--mint);color:#1e2433;border-color:#e4eaf6}
 .am-rail .sp{flex:1}
-.am-view{position:relative;min-width:0;padding:8px;display:flex;flex-direction:column;gap:8px}
+.am-view{position:relative;min-width:0;padding:8px;display:flex;flex-direction:column;gap:8px;background-color:#131826;background-image:radial-gradient(#222a3e 1.5px,transparent 1.5px);background-size:12px 12px}
 .am-view.in{animation:docIn .25s var(--step)}
 .am-p{position:relative;background:#262e43;border:3px solid #000;padding:6px;min-width:0}
 .am-b{display:inline-block;border:2px solid #e4eaf6;padding:1px 6px;font-size:10px;white-space:nowrap}
@@ -600,6 +601,35 @@ dialog.inst[open]{animation:rise .35s steps(5,end)}
 .am-grid span.e{border:2px dashed #3a4560;box-shadow:none;color:#56627d;font-size:10px}
 .am-grid span.sel{outline:3px solid var(--coral);outline-offset:1px}
 .am-insp{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px;align-items:center}
+/* Deck, as in the app: sidebar (profile card, pages tree), then page bar, the grid in the middle and
+   the inspector bar along the bottom */
+.am-dk{display:grid;grid-template-columns:150px minmax(0,1fr);margin:-8px;flex:1;min-height:0}
+.am-dside{display:flex;flex-direction:column;gap:7px;padding:8px;background:#1c2232;border-right:3px solid #e4eaf6;min-width:0}
+.am-dprof{display:flex;align-items:center;gap:6px;border:3px solid #e4eaf6;background:#262e43;padding:4px 5px;min-width:0}
+.am-dprof .chip{flex:none;width:20px;height:20px;border:2px solid #e4eaf6;background:var(--sky);color:#1e2433;display:grid;place-items:center}
+.am-dprof .chip svg{width:12px;height:12px}
+.am-dprof b{display:block;font-size:11px}
+.am-dprof small{display:block;font-size:8.5px;color:#a4b0c8;white-space:nowrap}
+.am-drow{display:grid;grid-template-columns:1fr 1fr;gap:4px}
+.am-drow .am-b{text-align:center;border-width:2px;padding:2px 0}
+.am-node{display:flex;align-items:center;gap:5px;padding:3px 5px;border:2px solid transparent;font-size:10px;min-width:0}
+.am-node svg{width:10px;height:10px;flex:none}
+.am-node span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.am-node i{font-style:normal;margin-left:auto;color:#a4b0c8}
+.am-node .tw{width:8px;flex:none;font-size:8px}
+.am-node.on{background:var(--mint);color:#1e2433;border-color:#e4eaf6}
+.am-node.on i{color:#1e2433}
+.am-dsub{margin-left:9px;padding-left:5px;border-left:2px dotted #3a4560;display:flex;flex-direction:column;gap:2px}
+.am-dmain{display:flex;flex-direction:column;min-width:0;min-height:0}
+.am-dmain .am-top{padding:8px 8px 0}
+.am-dmain .am-top b span{color:#a4b0c8;font-weight:400}
+.am-dgrid{flex:1;display:grid;align-content:center;padding:8px}
+.am-dk .am-grid{gap:5px}
+.am-dk .am-grid span{border:3px solid #e4eaf6;box-shadow:3px 3px 0 #04060b}
+.am-dk .am-grid span.e{border:2px dashed #3a4560;box-shadow:none}
+.am-dk .am-grid span.sel{outline:3px solid #c93c41;outline-offset:2px}
+.am-dinsp{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px;align-items:center;padding:6px 8px;background:#1c2232;border-top:3px solid #e4eaf6;position:relative}
+.am-dinsp b{font-size:11px}
 .am-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
 .am-card{display:flex;flex-direction:column;gap:4px}
 .am-card b{font-size:12px}
@@ -863,7 +893,8 @@ footer .f-brand p{margin-top:8px;max-width:34ch}
   .conn-wire{height:40px;width:12px;justify-self:center;background:repeating-linear-gradient(180deg,var(--ink) 0 8px,transparent 8px 14px)}
   .conn-tag{left:22px;top:50%;transform:translateY(-50%)}
   .pk{display:none}
-  .am-deck,.am-set{grid-template-columns:minmax(0,1fr)}
+  .am-deck,.am-set,.am-dk{grid-template-columns:minmax(0,1fr)}
+  .am-dside{border-right:0;border-bottom:3px solid #e4eaf6}
   .am-side,.am-tabs{display:none}
   .pair-qr{justify-self:center}
   .notice{grid-template-columns:minmax(0,1fr);padding:18px}
@@ -998,7 +1029,7 @@ footer .f-brand p{margin-top:8px;max-width:34ch}
 
     <div class="stage load d2" id="stage" aria-label="The Deck page of the Minniondeck desktop app, a 5 by 3 page, with each press shown in the PC log">
       <div class="phone appwin" id="phone">
-        <div class="am-bar"><span class="am-logo"></span><b>Minniondeck</b><span class="am-crumb">My profile / Page 1</span><span class="am-win" aria-hidden="true"><i>_</i><i>□</i><i>✕</i></span></div>
+        <div class="am-bar"><img class="am-logo" src="icons/icon.png" alt=""><b>Minniondeck</b><span class="am-crumb">My profile / Page 1</span><span class="am-win" aria-hidden="true"><i>_</i><i>□</i><i>✕</i></span></div>
         <div class="aw-body">
           <div class="aw-rail" id="aw-rail" aria-hidden="true"></div>
           <div class="aw-main">
@@ -2890,6 +2921,7 @@ export!(MyPlugin);</code></pre>
 
   /* tour: the app window mock, click through its pages */
   var TR_GL = {
+    star: ["...##...","...##...","########",".######.","..####..",".##..##.","##....##","........"],
     grid: ["........",".##..##.",".##..##.","........","........",".##..##.",".##..##.","........"],
     people: ["..##....",".####.##","..##.###","......#.",".####...","######..","######..","........"],
     phone: ["..####..","..#..#..","..#..#..","..#..#..","..#..#..","..####..","..#.##..","..####.."],
@@ -2923,13 +2955,16 @@ export!(MyPlugin);</code></pre>
                  trKey("msfs2024"), trGlyphKey("camera", "#5fd0a8"), trGlyphKey("lock", "#ffb38a"), trKey("twitch"), '<span class="e">+</span>',
                  trGlyphKey("globe", "#7cc4ff"), '<span class="e">+</span>', '<span class="e">+</span>', trGlyphKey("note", "#ffc93c"), '<span class="e">+</span>'];
         g[2] = g[2].replace("<span ", '<span class="sel" ');
-        return '<div class="am-deck"><aside class="am-side">' +
-          '<div class="am-prof" style="position:relative">' + hs(1, "right:-8px;top:-8px") + '<i></i><b>My profile</b><small>Switched by hand</small></div>' +
-          '<span class="am-cap">Pages</span><div class="am-row" style="position:relative">' + hs(2, "right:-8px;top:-10px") + '<span class="am-b">+ Page</span><span class="am-b">+ Folder</span></div>' +
-          '<div class="am-page on">Page 1<i>9</i></div><div class="am-page">Streaming<i>6</i></div><div class="am-page">▸ Flight</div></aside>' +
-          '<div class="am-main"><div class="am-top" style="position:relative">' + hs(3, "right:-6px;top:-12px") + '<b>My profile / Page 1</b><span class="am-b">5 × 3 grid ▾</span><span class="am-b">Edit layout</span><span class="am-b">Show on phones</span></div>' +
-          '<div class="am-grid" style="position:relative">' + hs(4, "left:-8px;top:-8px") + g.join("") + '</div>' +
-          '<div class="am-p am-insp">' + hs(5, "right:-8px;top:-10px") + '<div><b>Spotify</b><div class="am-dim">Play or pause · 1 × 1 button</div></div><div class="am-row"><span class="am-b go">Edit button</span><span class="am-b">Press</span><span class="am-b">Duplicate</span><span class="am-b">⋯</span></div></div></div></div>';
+        var pg = function(name, n, on){ return '<div class="am-node' + (on ? " on" : "") + '">' + rowsSvg(TR_GL.grid) + '<span>' + name + '</span><i>' + n + '</i></div>'; };
+        return '<div class="am-dk"><aside class="am-dside">' +
+          '<div class="am-dprof" style="position:relative">' + hs(1, "right:-8px;top:-8px") + '<span class="chip">' + rowsSvg(TR_GL.star) + '</span><div><b>My profile</b><small>Switched by hand</small></div></div>' +
+          '<span class="am-cap">Pages</span><div class="am-drow" style="position:relative">' + hs(2, "right:-8px;top:-10px") + '<span class="am-b">+ Page</span><span class="am-b">+ Folder</span></div>' +
+          pg("Page 1", 9, 1) + pg("Streaming", 6) +
+          '<div class="am-node"><span class="tw">▼</span>' + glyphSvg("folder") + '<span>Flight</span><i>2</i></div>' +
+          '<div class="am-dsub">' + pg("Cockpit", 15) + pg("Ground", 8) + '</div></aside>' +
+          '<div class="am-dmain"><div class="am-top" style="position:relative">' + hs(3, "right:-2px;top:-4px") + '<b><span>My profile / </span>Page 1</b><span class="am-b">5 × 3 grid ▾</span><span class="am-b">Edit layout</span><span class="am-b">Show on phones</span></div>' +
+          '<div class="am-dgrid"><div class="am-grid" style="position:relative">' + hs(4, "left:4px;top:-10px") + g.join("") + '</div></div>' +
+          '<div class="am-dinsp">' + hs(5, "right:-2px;top:-12px") + '<div><b>Spotify</b><div class="am-dim">Play or pause · 1 × 1 button</div></div><div class="am-row"><span class="am-b go">Edit button</span><span class="am-b">Press</span><span class="am-b">Duplicate</span><span class="am-b">⋯</span></div></div></div></div>';
       } },
     { id: "profiles", name: "Profiles", icon: "people", crumb: "Profiles",
       lead: "A profile is a set of pages and folders: one for streaming, one for flying, one for every day.",
