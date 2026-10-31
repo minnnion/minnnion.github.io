@@ -2719,8 +2719,9 @@ export!(MyPlugin);</code></pre>
 
   /* marketplace: the plugin list comes from index.json, the same file the app's Plugins page will read */
   var MK = {data:null, cat:"all", q:"", sort:"name"};
-  var CATS = [["all","All"],["flight","Flight"],["general","General"],["truck","Truck"],["racing","Racing"]];
-  var CATNAME = {flight:"Flight", general:"General", truck:"Truck", racing:"Racing"};
+  // The same four uses as Minniondeck Setup's first page
+  var CATS = [["all","All"],["general","General"],["streaming","Streaming"],["games","Games"],["work","Work"]];
+  var CATNAME = {general:"General", streaming:"Streaming", games:"Games", work:"Work"};
   var mkGrid = document.getElementById("mk-grid"), mkList = document.getElementById("mk-list"), mkDetail = document.getElementById("mk-detail");
   var mkQ = document.getElementById("mk-q"), mkSort = document.getElementById("mk-sort"), mkCats = document.getElementById("mk-cats");
 
@@ -2780,7 +2781,7 @@ export!(MyPlugin);</code></pre>
     });
     document.getElementById("mk-count").textContent = list.length === 1 ? "1 plugin" : list.length + " plugins";
     if (!list.length){
-      var soonCat = (MK.cat === "truck" || MK.cat === "racing") && !q;
+      var soonCat = (MK.cat === "streaming" || MK.cat === "games" || MK.cat === "work") && !q;
       mkGrid.innerHTML = '<div class="mk-empty frame" style="grid-column:1/-1">' +
         (soonCat ? '<span class="chip soon">Coming soon</span><h3>No ' + CATNAME[MK.cat].toLowerCase() + ' plugins yet</h3><p>Official ' + CATNAME[MK.cat].toLowerCase() + ' plugins are on the way. You can also build one and send it in.</p><a class="btn plain" href="#mk-submit" data-jump="mk-submit">How to add a plugin</a>'
                  : '<h3>Nothing matches “' + esc(MK.q) + '”</h3><p>Try a plugin name or a key, like “pushback” or “volume”.</p><button type="button" class="btn plain" data-clear="1">Clear search</button>') + '</div>';
