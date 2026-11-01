@@ -892,7 +892,7 @@ main.tight{gap:22px}
 .sizes button[aria-pressed="true"]{background:var(--sun)}
 .empty2{font-family:var(--f-mono);font-size:12px;color:var(--slate)}
 
-/* the "built with AI" notice, on Home and About */
+/* the "still being finished" notice, on Home and About */
 .notice{display:grid;grid-template-columns:auto minmax(0,1fr);gap:20px;align-items:start;padding:22px 24px;background:#fff8e1;border-color:var(--ink)}
 .notice-tag{width:52px;height:52px;display:grid;place-items:center;background:var(--sun);border:4px solid var(--ink);box-shadow:3px 3px 0 var(--shadow);font-family:var(--f-mono);font-size:28px;font-weight:600;animation:wave 3s var(--step) infinite}
 .notice-body{display:flex;flex-direction:column;gap:10px;min-width:0}
@@ -1145,8 +1145,8 @@ footer .f-brand p{margin-top:8px;max-width:34ch}
   <section class="notice frame load d4" aria-labelledby="home-note">
     <div class="notice-tag" aria-hidden="true">!</div>
     <div class="notice-body">
-      <h2 id="home-note">Built with AI, still being finished</h2>
-      <p>Minniondeck is fully vibe coded and not finished yet, so you will find bugs. It comes as it is, without any warranty. If you change the code or add plugins from others, problems from those changes are your own responsibility. Found a bug? Please tell us.</p>
+      <h2 id="home-note">Still being finished</h2>
+      <p>Minniondeck is not finished yet, so you will find bugs. It comes as it is, without any warranty. If you change the code or add plugins from others, problems from those changes are your own responsibility. Found a bug? Please tell us.</p>
       <div class="cta"><a class="btn mint" href="#contribute" data-view="contribute" data-scroll="ct-bug">Report a bug</a><a class="btn plain" href="#about" data-view="about" data-scroll="ab-notice">Read more</a></div>
     </div>
   </section>
@@ -1327,7 +1327,7 @@ footer .f-brand p{margin-top:8px;max-width:34ch}
       <span><img class="px" src="icons/sp-play.png" alt=""></span><span><img class="px" src="icons/timer-countdown.png" alt=""></span><span><img class="px" src="icons/soundboard-sound.png" alt=""></span><span><img class="px" src="icons/sysmon-cpu.png" alt=""></span><span><img class="px" src="icons/weather-sun.png" alt=""></span><span><img class="px" src="icons/sp-volume.png" alt=""></span>
     </div>
     <h2 id="final-title">Build your deck</h2>
-    <p>One installer, your PC, your phone. The Windows download is coming soon.</p>
+    <p>One installer, your PC, your phone. Download Minniondeck for Windows.</p>
     <a class="btn mint" href="#download" data-view="download">Get Minniondeck</a>
   </section>
 </main>
@@ -1598,7 +1598,7 @@ footer .f-brand p{margin-top:8px;max-width:34ch}
   <div class="tw"><table><thead><tr><th>Page</th><th>What it's for</th></tr></thead><tbody>
     <tr><td>Deck</td><td>Your pages and buttons. Make and edit buttons here.</td></tr>
     <tr><td>Profiles</td><td>Sets of pages, and switching between them.</td></tr>
-    <tr><td>Phones</td><td>Pair phones and see which are connected.</td></tr>
+    <tr><td>Phones</td><td>Pair phones and see which are connected. The phone app is coming soon.</td></tr>
     <tr><td>Testing</td><td>Features being tried out before they go on the deck.</td></tr>
     <tr><td>Settings</td><td>Start-up, look, phones, plugins, backups and updates.</td></tr>
   </tbody></table></div>
@@ -2026,9 +2026,8 @@ export!(MyPlugin);</code></pre>
     <div class="notice-tag" aria-hidden="true">!</div>
     <div class="notice-body">
       <span class="label">Please read</span>
-      <h2 id="ab-note">Built with AI, and still being finished</h2>
+      <h2 id="ab-note">Still being finished</h2>
       <ul>
-        <li><b>Fully vibe coded.</b> Minniondeck was built by describing what it should do to an AI coding assistant, then trying it out and fixing what broke. It works, but it hasn't been through the testing a big company would give it.</li>
         <li><b>Not finished yet.</b> Some parts are marked "coming soon", and you will find bugs. Please report them: every report helps finish it.</li>
         <li><b>Provided as it is.</b> Minniondeck comes without any warranty. Use it at your own risk, and keep backups of anything that matters to you.</li>
         <li><b>Your changes are yours.</b> If you change the code, build your own version, or install plugins from other people, problems that come from those changes are your own responsibility, not the project's.</li>
@@ -2175,7 +2174,7 @@ export!(MyPlugin);</code></pre>
   </section>
 
   <section aria-labelledby="tr-conn" class="rv">
-    <div class="head"><span class="label">Phones</span><h2 id="tr-conn">How your phone connects</h2><p>Your phone talks straight to Minniondeck on your PC, over your own Wi-Fi. Nothing goes through the internet or a cloud service.</p></div>
+    <div class="head"><span class="label">Phones</span><h2 id="tr-conn">How your phone connects</h2><p>The phone app is coming soon. Your phone talks straight to Minniondeck on your PC, over your own Wi-Fi. Nothing goes through the internet or a cloud service.</p></div>
     <div class="conn frame">
       <div class="conn-node"><div class="conn-ic" style="background:var(--sky)" data-trg="phone"></div><b>Minnionphone</b><span>Shows your buttons and live screens</span></div>
       <div class="conn-wire" aria-hidden="true"><span class="conn-tag">Wi-Fi · encrypted</span><i class="pk a"></i><i class="pk b"></i><i class="pk c"></i></div>
@@ -3355,7 +3354,7 @@ export!(MyPlugin);</code></pre>
           '<p class="am-dim" style="margin:0">Profiles save automatically.</p>';
       } },
     { id: "phones", name: "Phones", icon: "phone", crumb: "Phones",
-      lead: "Pair phones and see which are connected. The pairing code only works while this page is open.",
+      lead: "Pair phones and see which are connected. The pairing code only works while this page is open. The phone app is coming soon.",
       points: [["Paired phones", "Each phone, whether it's connected, and its Android and app version. Rename one, or forget it."],
                ["Pair a new phone", "Install Minniondeck on the phone, tap Add a PC and scan the code. It carries this PC's address, a one-time code and a check for the PC's certificate."],
                ["The code", "6 digits, good for 5 minutes and 5 tries. Typing it in works too."],
